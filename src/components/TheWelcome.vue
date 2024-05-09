@@ -10,8 +10,8 @@ const allPokemon = ref([]);
 const searchFilter = ref('');
 
 const filters = ref({});
-const updateFilters = (useFilters) => {
-  filters.value = useFilters;
+const updateFilters = (updatedFilters) => {
+  filters.value = updatedFilters;
 };
 
 const fetchPokemon = async () => {
@@ -31,22 +31,15 @@ if (localStorage.getItem("pokemon")) {
 };
 
 const filteredPokemon = computed(() => {
-  const list = allPokemon.value;
-  if (filters.value.type){
-    return list.filter(i => {
-    const isTypeFilter = i.types.some(t => {
-      return t.type.name === filters.value.type
-    });
-    return isTypeFilter
+  return allPokemon.value.filter(pokemon => {
+    const isTypeFilter = filters.value.type ? pokemon.types.some(type => {return type.type.name === filters.value.type;}) : true ;
+    const isSearchFilter = searchFilter.value ? pokemon.name.includes(searchFilter.value) : true;
+    return isTypeFilter && isSearchFilter
   });
-  } else {
-  return list
-  };
   
   // if (searchFilter.value !== '') {
   //   return list.filter(i => i.name.includes(searchFilter.value))
   // }
-  return list
 });
 
 const handleSearch = (search) => {
@@ -62,7 +55,7 @@ const handleSearch = (search) => {
   </div>
   <div class="grid grid-cols-2">
     <div>
-      <Filters @getFilters="updateFilters"/>
+      <Filters @updateFilters="updateFilters"/>
     </div>
     <div>
       <h1 class="text-xl bg-green-600">{{ filters.type }}</h1>

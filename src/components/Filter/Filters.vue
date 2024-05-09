@@ -11,7 +11,7 @@ const clearFilters = () => {
   filters.value.type = '';
   filters.value.ability = '';
   filters.value.moves = '';
-  emit("getFilters", filters.value)
+  emit("updateFilters", filters.value)
 }
 
 const show = ref({
@@ -66,14 +66,14 @@ const moves = []
 
 const setType = (e) => {
   filters.value.type = e
-  emit("getFilters", filters.value)
+  emit("updateFilters", filters.value)
 }
 const setAbility = (e) => {
   filters.value.ability = e 
-  emit("getFilters", filters.value)
+  emit("updateFilters", filters.value)
 }
 
-const emit = defineEmits(["getFilters"])
+const emit = defineEmits(["updateFilters"])
 
 </script>
 
