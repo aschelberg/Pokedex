@@ -33,8 +33,12 @@ if (localStorage.getItem("pokemon")) {
 const filteredPokemon = computed(() => {
   return allPokemon.value.filter(pokemon => {
     const isTypeFilter = filters.value.type ? pokemon.types.some(type => {return type.type.name === filters.value.type;}) : true ;
+    const isAbilityFilter = filters.value.ability ? pokemon.abilities.some(ability => {return ability.ability.name === filters.value.ability;}) : true ;
+    const isMovesFilter = filters.value.moves ? pokemon.moves.some(move => {return move.move.name === filters.value.moves;}) : true ;
+    
     const isSearchFilter = searchFilter.value ? pokemon.name.includes(searchFilter.value) : true;
-    return isTypeFilter && isSearchFilter
+    
+    return isTypeFilter && isAbilityFilter && isMovesFilter && isSearchFilter
   });
   
   // if (searchFilter.value !== '') {
