@@ -73,6 +73,9 @@ const emit = defineEmits(["updateFilters"])
 </script>
 
 <template>
+  <div class="flex justify-center">
+    <button @click.stop="clearFilters" class="text-2xl bg-yellow-300 p-1">Clear Filters</button>
+  </div>
   <div>
     <label for="type" class="sr-only">Select Type</label>
     <select name="type" id="type" v-model="filters.type" @click="setFilters">
