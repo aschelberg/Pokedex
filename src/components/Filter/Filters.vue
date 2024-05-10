@@ -2,13 +2,15 @@
 import useType from "@/composables/useType.js";
 import useAbility from "@/composables/useAbility.js";
 import useMoves from "@/composables/useMoves.js";
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 const filters = ref({
   type: '',
   ability: '',
   moves: '',
 });
+
+const emit = defineEmits(["updateFilters"]);
 
 const clearFilters = () => {
   filters.value.type = '';
@@ -17,14 +19,14 @@ const clearFilters = () => {
   emit("updateFilters", filters.value)
 }
 
-const show = ref({
-  type: false,
-  ability: false,
-})
 
 const types = ref([])
 const abilities = ref([]);
 const moves = ref([]);
+
+watch(filters, () => {
+  emit("updateFilters", filters.value)
+}, { deep: true});
 
 // fetch and set types to local storage for filters
 const { getType } = useType();
@@ -64,12 +66,6 @@ if (localStorage.getItem("moves")) {
   fetchMoves();
 };
 
-const setFilters = () => {
-  emit("updateFilters", filters.value)
-}
-
-const emit = defineEmits(["updateFilters"])
-
 </script>
 
 <template>
@@ -78,7 +74,7 @@ const emit = defineEmits(["updateFilters"])
   </div>
   <div>
     <label for="type" class="sr-only">Select Type</label>
-    <select name="type" id="type" v-model="filters.type" @click="setFilters">
+    <select name="type" id="type" v-model="filters.type">
       <option value="">Select Type</option>
       <option v-for="t in types" :value="t.name">{{ t.name }}</option>
     </select>

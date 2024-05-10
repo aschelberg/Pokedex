@@ -4,7 +4,7 @@ import Filters from '@/components/Filter/Filters.vue';
 import Search from '@/components/Filter/Search.vue';
 import { ref, computed, watch } from "vue";
 
-const { getPokemon } = usePokemon();
+const { getPokemon, getAllPokemon } = usePokemon();
 
 const allPokemon = ref([]);
 const searchFilter = ref('');
@@ -15,13 +15,11 @@ const updateFilters = (updatedFilters) => {
 };
 
 const fetchPokemon = async () => {
-  const list = []
-  for (let i = 1; i <= 25; i++) {
+  for (let i = 1; i <= 20; i++) {
     const characterObj = await getPokemon(`${i}`);
-    list.push(characterObj);
+    allPokemon.value.push(characterObj);
   };
-  localStorage.setItem("pokemon", JSON.stringify(list));
-  allPokemon.value = list
+  localStorage.setItem("pokemon", JSON.stringify(allPokemon.value));
 };
 
 if (localStorage.getItem("pokemon")) {
