@@ -22,19 +22,18 @@ const show = ref({
   ability: false,
 })
 
-const type = ref([])
-const ability = ref([]);
+const types = ref([])
+const abilities = ref([]);
 const moves = ref([]);
 
 // fetch and set types to local storage for filters
 const { getType } = useType();
 const fetchTypes = async () => {
   const pokemonTypes = await getType();
-  type.value = pokemonTypes;
   localStorage.setItem("types", JSON.stringify(pokemonTypes.results));
 };
 if (localStorage.getItem("types")) {
-  type.value = JSON.parse(localStorage.getItem("types"))
+  types.value = JSON.parse(localStorage.getItem("types"))
 } else {
   fetchTypes();
 };
@@ -47,7 +46,7 @@ const fetchAbility = async () => {
 };
 
 if (localStorage.getItem("ability")) {
-  ability.value = JSON.parse(localStorage.getItem("ability"))
+  abilities.value = JSON.parse(localStorage.getItem("ability"))
 } else {
   fetchAbility();
 };
@@ -65,16 +64,7 @@ if (localStorage.getItem("moves")) {
   fetchMoves();
 };
 
-const setType = (e) => {
-  filters.value.type = e
-  emit("updateFilters", filters.value)
-}
-const setAbility = (e) => {
-  filters.value.ability = e 
-  emit("updateFilters", filters.value)
-}
-const setMoves = (e) => {
-  filters.value.moves = e
+const setFilters = () => {
   emit("updateFilters", filters.value)
 }
 
@@ -83,33 +73,28 @@ const emit = defineEmits(["updateFilters"])
 </script>
 
 <template>
-   <div class="flex justify-center">
-    <button @click.stop="clearFilters" class="text-2xl bg-yellow-300 p-1">Clear Filters</button>
+  <div>
+    <label for="type" class="sr-only">Select Type</label>
+    <select name="type" id="type" v-model="filters.type" @click="setFilters">
+      <option value="">Select Type</option>
+      <option v-for="t in types" :value="t.name">{{ t.name }}</option>
+    </select>
   </div>
   <div>
-    <button @click="show.type = !show.type" class="text-2xl">Type</button>
-    <ul v-if="show.type" >
-      <li v-for="t in type">
-        <input @click="setType(t.name.toLowerCase())" type="button" :value="t.name">
-      </li>
-    </ul>
+    <label for="ability" class="sr-only">Select Ability</label>
+    <select name="ability" id="ability" v-model="filters.ability" @click="setFilters">
+      <option value="">Select Ability</option>
+      <option v-for="ability in abilities" :value="ability.name">{{ ability.name }}</option>
+    </select>
   </div>
   <div>
-    <button @click="show.ability = !show.ability" class="text-2xl">Ability</button>
-    <ul v-if="show.ability" >
-      <li v-for="a in ability">
-        <input @click="setAbility(a.name.toLowerCase())" type="button" :value="a.name">
-      </li>
-    </ul>
+    <label for="move" class="sr-only">Select Move</label>
+    <select name="move" id="move" v-model="filters.moves" @click="setFilters">
+      <option value="">Select Move</option>
+      <option v-for="move in moves" :value="move.name">{{ move.name }}</option>
+    </select>
   </div>
-  <div>
-    <button @click="show.moves = !show.moves" class="text-2xl">Moves</button>
-    <ul v-if="show.moves" >
-      <li v-for="a in moves">
-        <input @click="setMoves(a.name.toLowerCase())" type="button" :value="a.name">
-      </li>
-    </ul>
-  </div>
+  
 </template>
 
 <style lang="scss" scoped>
