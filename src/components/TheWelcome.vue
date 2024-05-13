@@ -30,18 +30,14 @@ if (localStorage.getItem("pokemon")) {
 
 const filteredPokemon = computed(() => {
   return allPokemon.value.filter(pokemon => {
-    const isTypeFilter = filters.value.type ? pokemon.types.some(type => {return type.type.name === filters.value.type;}) : true ;
-    const isAbilityFilter = filters.value.ability ? pokemon.abilities.some(ability => {return ability.ability.name === filters.value.ability;}) : true ;
-    const isMovesFilter = filters.value.moves ? pokemon.moves.some(move => {return move.move.name === filters.value.moves;}) : true ;
+    const isTypeFilter = filters.value.type ? pokemon.types.some(type => type.type.name === filters.value.type) : true ;
+    const isAbilityFilter = filters.value.ability ? pokemon.abilities.some(ability => ability.ability.name === filters.value.ability) : true ;
+    const isMovesFilter = filters.value.move ? pokemon.moves.some(move => move.move.name === filters.value.move) : true ;
     
     const isSearchFilter = searchFilter.value ? pokemon.name.includes(searchFilter.value) : true;
     
     return isTypeFilter && isAbilityFilter && isMovesFilter && isSearchFilter
   });
-  
-  // if (searchFilter.value !== '') {
-  //   return list.filter(i => i.name.includes(searchFilter.value))
-  // }
 });
 
 const handleSearch = (search) => {
@@ -55,18 +51,27 @@ const handleSearch = (search) => {
   <div>
     <Search @search="handleSearch"/>
   </div>
-  <div class="grid grid-cols-2">
-    <div>
+  <div class="grid grid-cols-6 gap-2">
+    <div class="col-span-1">
       <Filters @updateFilters="updateFilters"/>
     </div>
-    <div>
+    <div class="col-span-5">
       <h1 class="text-xl bg-green-600">{{ filters.type }}</h1>
       <h4 class="text-xl bg-blue-400">{{ filteredPokemon.length }}</h4>
-      <ul>
+      <ul class="grid grid-cols-3">
         <li
           class=""
           v-for="pokemon in filteredPokemon">
-            <div class="text-md text-xl">{{ pokemon.name }}</div>
+            <div>
+              <img :src="pokemon.sprites.front_default" :alt="`${pokemon.name} Pic`">
+            </div>
+            <div class="text-md text-xl">{{ pokemon.name.toUpperCase() }}</div>
+            <div class="text-xs">#{{ pokemon.id }}</div>
+            <div class="flex">
+              <div v-for="t in pokemon.types" class="m-1 px-4 py-2 bg-green-200 rounded-full">
+                {{ t.type.name }}
+              </div>
+            </div>
         </li>
       </ul>
     </div>

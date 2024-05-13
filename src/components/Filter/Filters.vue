@@ -2,12 +2,21 @@
 import useType from "@/composables/useType.js";
 import useAbility from "@/composables/useAbility.js";
 import useMoves from "@/composables/useMoves.js";
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
+import {
+  Combobox,
+  ComboboxButton,
+  ComboboxInput,
+  ComboboxLabel,
+  ComboboxOption,
+  ComboboxOptions,
+} from '@headlessui/vue'
 import { ref, computed, watch } from 'vue';
 
 const filters = ref({
   type: '',
   ability: '',
-  moves: '',
+  move: '',
 });
 
 const emit = defineEmits(["updateFilters"]);
@@ -15,7 +24,7 @@ const emit = defineEmits(["updateFilters"]);
 const clearFilters = () => {
   filters.value.type = '';
   filters.value.ability = '';
-  filters.value.moves = '';
+  filters.value.move = '';
   emit("updateFilters", filters.value)
 }
 
@@ -66,34 +75,108 @@ if (localStorage.getItem("moves")) {
   fetchMoves();
 };
 
+const queryType = ref('')
+const queryAbility = ref('')
+const queryMove = ref('')
+const filteredType = computed(() =>
+  queryType.value === ''
+    ? types.value
+    : types.value.filter((type) => {
+        return type.name.includes(queryType.value.toLowerCase())
+      })
+)
+const filteredAbility = computed(() =>
+  queryAbility.value === ''
+    ? abilities.value
+    : abilities.value.filter((ability) => {
+        return ability.name.includes(queryAbility.value.toLowerCase())
+      })
+)
+const filteredMove = computed(() =>
+  queryMove.value === ''
+    ? moves.value
+    : moves.value.filter((move) => {
+        return move.name.includes(queryMove.value.toLowerCase())
+      })
+)
+
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <button @click.stop="clearFilters" class="text-2xl bg-yellow-300 p-1">Clear Filters</button>
+  <div class="grid grid-cols-1 gap-1 px-3">
+    <div class="max-w-sm mx-full">
+      <button type="button" @click.stop="clearFilters" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-500">Clear Filters</button>
+    </div>
+    <!-- Type Combobox -->
+    <Combobox as="div" v-model="filters.type" @update:modelValue="queryType = ''">
+      <ComboboxLabel class="block text-sm font-medium leading-6 text-gray-900">Select Type</ComboboxLabel>
+      <div class="relative mt-2">
+        <ComboboxInput class="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" @change="queryType = $event.target.value" @blur="queryType = ''" :display-value="(type) => type?.name" />
+        <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+          <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+        </ComboboxButton>
+
+        <ComboboxOptions v-if="filteredType.length > 0" class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <ComboboxOption v-for="t in filteredType" :value="t.name" as="template" v-slot="{ active, selected }">
+            <li :class="['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600 text-white' : 'text-gray-900']">
+              <span :class="['block truncate', selected && 'font-semibold']">
+                {{ t.name }}
+              </span>
+              <span v-if="selected" :class="['absolute inset-y-0 right-0 flex items-center pr-4', active ? 'text-white' : 'text-indigo-600']">
+                <CheckIcon class="h-5 w-5" aria-hidden="true" />
+              </span>
+            </li>
+          </ComboboxOption>
+        </ComboboxOptions>
+      </div>
+    </Combobox>
+    <!-- Ability Combobox -->
+    <Combobox as="div" v-model="filters.ability" @update:modelValue="queryAbility = ''">
+      <ComboboxLabel class="block text-sm font-medium leading-6 text-gray-900">Select Ability</ComboboxLabel>
+      <div class="relative mt-2">
+        <ComboboxInput class="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" @change="queryAbility = $event.target.value" @blur="queryAbility = ''" :display-value="(ability) => ability?.name" />
+        <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+          <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+        </ComboboxButton>
+
+        <ComboboxOptions v-if="filteredAbility.length > 0" class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <ComboboxOption v-for="ability in filteredAbility" :value="ability.name" as="template" v-slot="{ active, selected }">
+            <li :class="['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600 text-white' : 'text-gray-900']">
+              <span :class="['block truncate', selected && 'font-semibold']">
+                {{ ability.name }}
+              </span>
+              <span v-if="selected" :class="['absolute inset-y-0 right-0 flex items-center pr-4', active ? 'text-white' : 'text-indigo-600']">
+                <CheckIcon class="h-5 w-5" aria-hidden="true" />
+              </span>
+            </li>
+          </ComboboxOption>
+        </ComboboxOptions>
+      </div>
+    </Combobox>
+    <!-- Moves Combobox -->
+    <Combobox as="div" v-model="filters.move" @update:modelValue="queryMove = ''">
+      <ComboboxLabel class="block text-sm font-medium leading-6 text-gray-900">Select Move</ComboboxLabel>
+      <div class="relative mt-2">
+        <ComboboxInput class="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" @change="queryMove = $event.target.value" @blur="queryMove = ''" :display-value="(move) => move?.name" />
+        <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+          <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+        </ComboboxButton>
+
+        <ComboboxOptions v-if="filteredMove.length > 0" class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <ComboboxOption v-for="move in filteredMove" :value="move.name" as="template" v-slot="{ active, selected }">
+            <li :class="['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600 text-white' : 'text-gray-900']">
+              <span :class="['block truncate', selected && 'font-semibold']">
+                {{ move.name }}
+              </span>
+              <span v-if="selected" :class="['absolute inset-y-0 right-0 flex items-center pr-4', active ? 'text-white' : 'text-indigo-600']">
+                <CheckIcon class="h-5 w-5" aria-hidden="true" />
+              </span>
+            </li>
+          </ComboboxOption>
+        </ComboboxOptions>
+      </div>
+    </Combobox>
   </div>
-  <div>
-    <label for="type" class="sr-only">Select Type</label>
-    <select name="type" id="type" v-model="filters.type">
-      <option value="">Select Type</option>
-      <option v-for="t in types" :value="t.name">{{ t.name }}</option>
-    </select>
-  </div>
-  <div>
-    <label for="ability" class="sr-only">Select Ability</label>
-    <select name="ability" id="ability" v-model="filters.ability" @click="setFilters">
-      <option value="">Select Ability</option>
-      <option v-for="ability in abilities" :value="ability.name">{{ ability.name }}</option>
-    </select>
-  </div>
-  <div>
-    <label for="move" class="sr-only">Select Move</label>
-    <select name="move" id="move" v-model="filters.moves" @click="setFilters">
-      <option value="">Select Move</option>
-      <option v-for="move in moves" :value="move.name">{{ move.name }}</option>
-    </select>
-  </div>
-  
 </template>
 
 <style lang="scss" scoped>
