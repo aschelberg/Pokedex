@@ -1,0 +1,10 @@
+values from api
+
+abilities.ability.name (potential multiple names)
+height: num
+id
+moves.move.name (multiple move names)
+name
+sprites.front_default (url to png)
+types.type.name (potential multiple names)
+weight: num

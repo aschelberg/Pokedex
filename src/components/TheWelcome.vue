@@ -1,4 +1,6 @@
 <script setup>
+import { db } from "@/firebase/index.js";
+import { collection, query, orderBy, where, getDocs, limit } from "firebase/firestore";
 import usePokemon from "@/composables/usePokemon.js";
 import Filters from '@/components/Filter/Filters.vue';
 import Search from '@/components/Filter/Search.vue';
@@ -12,21 +14,28 @@ const searchFilter = ref('');
 const filters = ref({});
 const updateFilters = (updatedFilters) => {
   filters.value = updatedFilters;
+  fetchPokemon()
 };
+
+
 
 const fetchPokemon = async () => {
-  for (let i = 1; i <= 20; i++) {
-    const characterObj = await getPokemon(`${i}`);
-    allPokemon.value.push(characterObj);
-  };
-  localStorage.setItem("pokemon", JSON.stringify(allPokemon.value));
+  // const clauses = [] 
+  // if(searchFilter.value) {
+  //   clauses.push(where("name", "==", "bulbasaur"))
+  // }
+  const pokemonArray = []
+  const q = query(collection(db, "pokemon"), orderBy("id", "asc"), limit(30))
+  const pokemon = await getDocs(q);
+  pokemon.forEach((doc) => {
+    pokemonArray.push(doc.data())
+  });
+  allPokemon.value = pokemonArray
+  console.log(allPokemon.value)
 };
 
-if (localStorage.getItem("pokemon")) {
-  allPokemon.value = JSON.parse(localStorage.getItem("pokemon"));
-} else {
-  fetchPokemon();
-};
+fetchPokemon();
+
 
 const filteredPokemon = computed(() => {
   return allPokemon.value.filter(pokemon => {
@@ -43,7 +52,6 @@ const filteredPokemon = computed(() => {
 const handleSearch = (search) => {
   searchFilter.value = search;
 };
-
 
 </script>
 
