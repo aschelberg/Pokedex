@@ -1,6 +1,6 @@
 <script setup>
 import { db } from "@/firebase/index.js";
-import { collection, query, orderBy, where, getDocs, limit } from "firebase/firestore";
+import { collection, query, orderBy, where, doc, setDoc, getDocs, limit, updateDoc } from "firebase/firestore";
 import usePokemon from "@/composables/usePokemon.js";
 import Filters from '@/components/Filter/Filters.vue';
 import Search from '@/components/Filter/Search.vue';
@@ -10,74 +10,73 @@ const { getPokemon, getAllPokemon } = usePokemon();
 
 const allPokemon = ref([]);
 const searchFilter = ref('');
-
 const filters = ref({});
-const updateFilters = (updatedFilters) => {
-  filters.value = updatedFilters;
-  fetchPokemon()
-};
-
 
 
 const fetchPokemon = async () => {
-  // const clauses = [] 
-  // if(searchFilter.value) {
-  //   clauses.push(where("name", "==", "bulbasaur"))
-  // }
+  const dbFilters = [] 
+  if(searchFilter.value) {
+    dbFilters.push(where("name", "==", searchFilter.value))
+  }
+  if(filters.value.type) {
+    dbFilters.push(where("types", "array-contains", filters.value.type))
+  }
+  if(filters.value.ability) {
+    dbFilters.push(where("abilities", "array-contains", filters.value.ability))
+  }
+  if(filters.value.move) {
+    dbFilters.push(where("moves", "array-contains", filters.value.move))
+  }
+  if(!searchFilter.value && !filters.value.type && !filters.value.ability && !filters.value.move) {
+    dbFilters.push(limit(30))
+  }
+
   const pokemonArray = []
-  const q = query(collection(db, "pokemon"), orderBy("id", "asc"), limit(30))
+  const q = query(collection(db, "pokemon"), orderBy("id", "asc"), ...dbFilters)
   const pokemon = await getDocs(q);
   pokemon.forEach((doc) => {
     pokemonArray.push(doc.data())
   });
   allPokemon.value = pokemonArray
-  console.log(allPokemon.value)
 };
 
 fetchPokemon();
 
-
-const filteredPokemon = computed(() => {
-  return allPokemon.value.filter(pokemon => {
-    const isTypeFilter = filters.value.type ? pokemon.types.some(type => type.type.name === filters.value.type) : true ;
-    const isAbilityFilter = filters.value.ability ? pokemon.abilities.some(ability => ability.ability.name === filters.value.ability) : true ;
-    const isMovesFilter = filters.value.move ? pokemon.moves.some(move => move.move.name === filters.value.move) : true ;
-    
-    const isSearchFilter = searchFilter.value ? pokemon.name.includes(searchFilter.value) : true;
-    
-    return isTypeFilter && isAbilityFilter && isMovesFilter && isSearchFilter
-  });
-});
-
-const handleSearch = (search) => {
-  searchFilter.value = search;
+const updateFilters = (updatedFilters) => {
+  filters.value = updatedFilters;
 };
+const clearFilters = (updatedFilters) => {
+  searchFilter.value = '';
+  filters.value = updatedFilters;
+};
+
+watch([searchFilter, filters], fetchPokemon)
 
 </script>
 
 <template>
   <div>
-    <Search @search="handleSearch"/>
+    <Search v-model="searchFilter"/>
   </div>
   <div class="grid grid-cols-6 gap-2">
     <div class="col-span-1">
-      <Filters @updateFilters="updateFilters"/>
+      <Filters @updateFilters="updateFilters" @clearFilters="clearFilters"/>
     </div>
     <div class="col-span-5">
-      <h1 class="text-xl bg-green-600">{{ filters.type }}</h1>
-      <h4 class="text-xl bg-blue-400">{{ filteredPokemon.length }}</h4>
+      <!-- <h1 class="text-xl bg-green-600">{{ filters.type }}</h1>
+      <h4 class="text-xl bg-blue-400">{{ filteredPokemon.length }}</h4> -->
       <ul class="grid grid-cols-3">
         <li
           class=""
-          v-for="pokemon in filteredPokemon">
+          v-for="pokemon in allPokemon">
             <div>
-              <img :src="pokemon.sprites.front_default" :alt="`${pokemon.name} Pic`">
+              <img :src="pokemon.pic" :alt="`${pokemon.name} Pic`">
             </div>
             <div class="text-md text-xl">{{ pokemon.name.toUpperCase() }}</div>
             <div class="text-xs">#{{ pokemon.id }}</div>
             <div class="flex">
               <div v-for="t in pokemon.types" class="m-1 px-4 py-2 bg-green-200 rounded-full">
-                {{ t.type.name }}
+                {{ t }}
               </div>
             </div>
         </li>

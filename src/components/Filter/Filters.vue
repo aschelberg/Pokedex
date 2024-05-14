@@ -19,13 +19,13 @@ const filters = ref({
   move: '',
 });
 
-const emit = defineEmits(["updateFilters"]);
+const emit = defineEmits(["updateFilters", "clearFilters"]);
 
 const clearFilters = () => {
   filters.value.type = '';
   filters.value.ability = '';
   filters.value.move = '';
-  emit("updateFilters", filters.value)
+  emit("clearFilters", filters.value)
 }
 
 
