@@ -35,7 +35,7 @@ const moves = ref([]);
 
 watch(filters, () => {
   emit("updateFilters", filters.value)
-}, { deep: true});
+}, {deep: true});
 
 // fetch and set types to local storage for filters
 const { getType } = useType();
@@ -117,7 +117,7 @@ const filteredMove = computed(() =>
         </ComboboxButton>
 
         <ComboboxOptions v-if="filteredType.length > 0" class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-          <ComboboxOption v-for="t in filteredType" :value="t.name" as="template" v-slot="{ active, selected }">
+          <ComboboxOption v-for="t in filteredType" :key="t.name" :value="t.name" as="template" v-slot="{ active, selected }">
             <li :class="['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600 text-white' : 'text-gray-900']">
               <span :class="['block truncate', selected && 'font-semibold']">
                 {{ t.name }}
