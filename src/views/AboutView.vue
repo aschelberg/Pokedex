@@ -1,12 +1,14 @@
 <script setup>
+import PokemonProfile from "@/components/PokemonProfile.vue"
+
+const bulbasaur = '2'
 
 </script>
 
 <template>
   <main>
-    <div>
-      <h1>This is an about page</h1>
-    </div>
+    <PokemonProfile 
+      :name="bulbasaur"/>
   </main>
 </template>
 

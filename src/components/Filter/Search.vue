@@ -14,10 +14,10 @@ const handleSearch = _.debounce((e) => {
 </script>
 
 <template>
-  <form class="py-3 px-4 flex items-center">
+  <form class="py-4 pl-3 pr-2 flex items-center">
    <label class="sr-only">Search:</label>
-   <div class="relative w-full">
-    <input type="text" v-on:input="handleSearch" :value="modelValue" placeholder="Search..." class="px-2 bg-gray-50 border border-gray-300 text-grey-900 rounded-sm w-full">
+   <div class="relative w-full p">
+    <input type="text" v-on:input="handleSearch" :value="modelValue" placeholder="Search by name" class="my-2 px-2 border border-blue-500 text-grey-900 rounded-sm w-full">
    </div> 
   </form>
 </template>
