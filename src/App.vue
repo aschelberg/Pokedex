@@ -4,7 +4,7 @@ import AuthenticatedLayout from "@/components/AuthenticatedLayout/AuthenticatedL
 </script>
 
 <template>
- <div>
+ <div class="min-h-screen font-Konit">
     <AuthenticatedLayout>
       <RouterView v-slot="{ Component }">
         <template v-if="Component">
@@ -48,5 +48,17 @@ import AuthenticatedLayout from "@/components/AuthenticatedLayout/AuthenticatedL
 </template>
 
 <style scoped>
+* {
+  font-family: Kanit;
+}
 
+.page-enter-active,
+.page-leave-active {
+  transition: 600ms ease all;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-import PokemonProfile from "@/components/PokemonProfile.vue"
+import PokemonProfile from "@/components/Reusables/PokemonProfile.vue"
 
 const bulbasaur = '2'
 

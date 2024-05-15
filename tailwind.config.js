@@ -10,7 +10,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      Inter: ['Roboto Serif, serif'],
+      Inter: ['inter, sans-serif'],
     },
     screens: {
       sm: '640px',
