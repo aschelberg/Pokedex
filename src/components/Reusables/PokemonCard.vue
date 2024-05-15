@@ -1,5 +1,7 @@
 <script setup>
 import TypeBadge from "@/components/Reusables/TypeBadge.vue";
+import { BookmarkIcon as BookmarkIconFalse } from "@heroicons/vue/24/outline";
+import { BookmarkIcon as BookmarkIconTrue } from "@heroicons/vue/20/solid";
 
 const props = defineProps({
   pokemon: {
@@ -18,7 +20,8 @@ const props = defineProps({
         {{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}
       </div>
       <div class="flex gap-3 flex-1 justify-end">
-        <i class="fa-solid fa-circle-info text-xl hover:text-black duration-150 cursor-pointer"></i>
+        <BookmarkIconFalse v-if="true" class="h-8 w-6 text-blue-700"/>
+        <BookmarkIconTrue v-else class="h-8 w-6 text-blue-700" />
       </div>
     </div>
     <div>

@@ -1,5 +1,6 @@
 <script setup>
 import _ from "lodash";
+import { MagnifyingGlassIcon } from "@heroicons/vue/24/outline";
 
 const props = defineProps({
   modelValue: String,
@@ -14,10 +15,13 @@ const handleSearch = _.debounce((e) => {
 </script>
 
 <template>
-  <form class="py-4 pl-3 pr-2 flex items-center">
+  <form class="pb-4 pl-3 pr-2 flex items-center">
    <label class="sr-only">Search:</label>
    <div class="relative w-full p">
-    <input type="text" v-on:input="handleSearch" :value="modelValue" placeholder="Search by name" class="my-2 px-2 border border-blue-500 text-grey-900 rounded-sm w-full">
+    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+      <MagnifyingGlassIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+    </div>
+    <input type="text" v-on:input="handleSearch" :value="modelValue" placeholder="Search by name" class="block pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-2 px-2 border border-blue-500 text-grey-900 rounded-sm w-full">
    </div> 
   </form>
 </template>
