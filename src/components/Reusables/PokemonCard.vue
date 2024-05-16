@@ -2,6 +2,7 @@
 import TypeBadge from "@/components/Reusables/TypeBadge.vue";
 import { BookmarkIcon as BookmarkIconFalse } from "@heroicons/vue/24/outline";
 import { BookmarkIcon as BookmarkIconTrue } from "@heroicons/vue/20/solid";
+import { ref, watch } from "vue";
 
 const props = defineProps({
   pokemon: {
@@ -9,24 +10,35 @@ const props = defineProps({
   }
 })
 
+const bookmark = ref(false)
+
+const bookmarkToggle = () => {
+  bookmark.value = !bookmark.value
+  console.log(bookmark.value)
+  console.log(props.pokemon.name)
+}
+
 </script>
 
 <template>
-  <div class="flex flex-1 flex-col px-3">
+  <div class="flex flex-1 flex-col px-5">
     <img class="m-auto h-56 w-56 flex-shrink-0 rounded-full" :src="pokemon.pic" :alt="`${pokemon.name} Pic`"/>
-    <div class="flex justify-between pr-4">
+    <div class="flex justify-between">
       <RouterLink :to="`/pokemon/${pokemon.name}/${pokemon.id}`">
         <div class="text-2xl font-medium text-gray-900 hover:text-blue-400">
           {{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}
         </div>
       </RouterLink>
       <div class="flex gap-3 flex-1 justify-end">
-        <BookmarkIconFalse v-if="true" class="h-8 w-6 text-blue-700"/>
-        <BookmarkIconTrue v-else class="h-8 w-6 text-blue-700" />
+        <i class="fa-light fa-bookmark"></i>
+        <BookmarkIconFalse v-if="!bookmark" class="h-8 w-6 text-blue-700 cursor-pointer" @click="bookmarkToggle()"/>
+        <BookmarkIconTrue v-else class="h-8 w-6 text-blue-700 cursor-pointer" @click="bookmarkToggle()"/>
       </div>
     </div>
     <div>
-      {{ pokemon.id }}
+      <span>#</span>
+      <!-- {{ pokemon.id }} -->
+      {{ pokemon.id.toString().padStart(4,'0') }}
     </div>
     <!-- <dl class="mt-1 flex flex-grow flex-col justify-between">
       <dt class="sr-only">Role</dt>
@@ -34,7 +46,7 @@ const props = defineProps({
         <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{{ person.role }}</span>
       </dd>
     </dl> -->
-    <div class="flex justify-left gap-2 py-2">
+    <div class="flex justify-left gap-2 pb-4 pt-2">
       <TypeBadge v-for="t in pokemon.types" :pokemonType="t" />
     </div>
   </div>

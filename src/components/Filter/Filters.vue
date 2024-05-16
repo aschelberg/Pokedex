@@ -104,14 +104,14 @@ const filteredMove = computed(() =>
 
 <template>
   <div class="grid grid-cols-1 gap-2 px-3">
-    <div class="max-w rounded-sm border bg-white border-blue-600">
-      <button type="button" @click.stop="clearFilters" class="w-full py-1.5 text-gray-900 sm:text-sm sm:leading-6 hover:bg-red-300 hover:text-black">Clear Filters</button>
+    <div class="max-w rounded-lg border bg-white border-blue-600 hover:bg-blue-300 hover:text-black">
+      <button type="button" @click.stop="clearFilters" class="w-full py-1.5 text-gray-900 sm:text-sm sm:leading-6">Clear Filters</button>
     </div>
     <!-- Type Combobox -->
     <Combobox as="div" v-model="filters.type" @update:modelValue="queryType = ''">
-      <ComboboxLabel class="block text-xs font-medium leading-6 text-gray-900">Select Type:</ComboboxLabel>
+      <ComboboxLabel class="block text-xs font-medium leading-6 text-gray-900 sr-only">Select Type:</ComboboxLabel>
       <div class="relative mt-1">
-        <ComboboxInput class="w-full rounded-sm border border-blue-600 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" @change="queryType = $event.target.value" @blur="queryType = ''" :display-value="(type) => type" />
+        <ComboboxInput class="w-full rounded-lg border border-blue-600 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" @change="queryType = $event.target.value" @blur="queryType = ''" :display-value="(type) => type" placeholder="Select Type"/>
         <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
           <ChevronDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
         </ComboboxButton>
@@ -132,9 +132,9 @@ const filteredMove = computed(() =>
     </Combobox>
     <!-- Ability Combobox -->
     <Combobox as="div" v-model="filters.ability" @update:modelValue="queryAbility = ''">
-      <ComboboxLabel class="block text-xs font-medium leading-6 text-gray-900">Select Ability:</ComboboxLabel>
+      <ComboboxLabel class="block text-xs font-medium leading-6 text-gray-900 sr-only">Select Ability:</ComboboxLabel>
       <div class="relative mt-1">
-        <ComboboxInput class="w-full rounded-sm border border-blue-600 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" @change="queryAbility = $event.target.value" @blur="queryAbility = ''" :display-value="(ability) => ability" />
+        <ComboboxInput class="w-full rounded-lg border border-blue-600 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" @change="queryAbility = $event.target.value" @blur="queryAbility = ''" :display-value="(ability) => ability" placeholder="Select Ability"/>
         <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
           <ChevronDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
         </ComboboxButton>
@@ -155,9 +155,9 @@ const filteredMove = computed(() =>
     </Combobox>
     <!-- Moves Combobox -->
     <Combobox as="div" v-model="filters.move" @update:modelValue="queryMove = ''">
-      <ComboboxLabel class="block text-xs font-medium leading-6 text-gray-900">Select Move:</ComboboxLabel>
+      <ComboboxLabel class="block text-xs font-medium leading-6 text-gray-900 sr-only">Select Move:</ComboboxLabel>
       <div class="relative mt-1">
-        <ComboboxInput class="w-full rounded-sm border border-blue-600 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" @change="queryMove = $event.target.value" @blur="queryMove = ''" :display-value="(move) => move" />
+        <ComboboxInput class="w-full rounded-lg border border-blue-600 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" @change="queryMove = $event.target.value" @blur="queryMove = ''" :display-value="(move) => move" placeholder="Select Move"/>
         <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
           <ChevronDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
         </ComboboxButton>

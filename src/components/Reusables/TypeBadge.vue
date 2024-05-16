@@ -18,7 +18,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 #type_style {
-  padding: 8px 24px;
+  padding: 4px 20px;
   border-radius: 25px;
   border-style: solid;
   border-color: #000000;

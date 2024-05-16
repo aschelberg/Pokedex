@@ -66,7 +66,25 @@ watch([searchFilter, filters, page], fetchPokemon, {deep: true})
       <div class="col-span-1">
         <Filters @updateFilters="updateFilters" @clearFilters="clearFilters"/>
       </div>
-      <div class="p-2 col-span-5">
+      <div class="px-2 col-span-5">
+        <!-- Pagination -->
+        <nav class="flex items-center justify-between bg-white pb-3 sm:px-1" aria-label="Pagination">
+          <div class="hidden sm:block">
+            <p class="text-sm text-gray-700">
+              Showing
+              <span class="font-medium">{{ (limit*page) - (limit - 1) }}</span>
+              to
+              <span class="font-medium">{{ limit*page }}</span>
+              of
+              <span class="font-medium">{{ pagination.totalDocs }}</span>
+              results
+            </p>
+          </div>
+          <div class="flex flex-1 justify-between sm:justify-end">
+            <button @click="updatePage('prev')" :disabled="!pagination.hasPrevPage" class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 border border-blue-600 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</button>
+            <button @click="updatePage('next')" :disabled="!pagination.hasNextPage" class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 border border-blue-600 hover:bg-gray-50 focus-visible:outline-offset-0">Next</button>
+          </div>
+        </nav>
         <ul role="list" class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <li v-for="pokemon in allPokemon" class="border border-blue-600 col-span-1 flex flex-col rounded-lg bg-white shadow">
             <PokemonCard :pokemon="pokemon"/>
@@ -74,24 +92,7 @@ watch([searchFilter, filters, page], fetchPokemon, {deep: true})
         </ul>
       </div>
     </div>
-    <!-- Pagination -->
-    <nav class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
-      <div class="hidden sm:block">
-        <p class="text-sm text-gray-700">
-          Showing
-          <span class="font-medium">{{ (limit*page) - (limit - 1) }}</span>
-          to
-          <span class="font-medium">{{ limit*page }}</span>
-          of
-          <span class="font-medium">{{ pagination.totalDocs }}</span>
-          results
-        </p>
-      </div>
-      <div class="flex flex-1 justify-between sm:justify-end">
-        <button @click="updatePage('prev')" :disabled="!pagination.hasPrevPage" class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</button>
-        <button @click="updatePage('next')" :disabled="!pagination.hasNextPage" class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Next</button>
-      </div>
-    </nav>
+    
   </div>
 </template>
 
