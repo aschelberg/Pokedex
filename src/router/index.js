@@ -22,9 +22,8 @@ const router = createRouter({
       path: '/pokemon/:name/:id',
       name: 'pokemonOverview',
       component: PokemonView,
-      meta: {
-        title: 'Pokemon Name Here',
-      }
+      meta: {title: 'Pokemon Name Here'}
+        
     }, {
       path: '/mypokemon',
       name: 'mypokemon',

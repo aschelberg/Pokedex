@@ -20,7 +20,7 @@ const userNavigation = [
 
 const navigation = [
   { name: 'Pokedex', href: '/pokedex' },
-  { name: 'My Pokemon', href: '/mypokemon' }
+  { name: 'My Pokemon', href: '/mypokemon' },
 ]
 
 </script>
