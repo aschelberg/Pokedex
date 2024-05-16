@@ -56,7 +56,6 @@ watch([searchFilter, filters, page], fetchPokemon, {deep: true})
 </script>
 
 <template>
-
   <div>
     <!-- search -->
     <div>

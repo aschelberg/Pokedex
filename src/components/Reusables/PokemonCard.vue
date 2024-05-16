@@ -12,13 +12,14 @@ const props = defineProps({
 </script>
 
 <template>
-
   <div class="flex flex-1 flex-col px-3">
     <img class="m-auto h-56 w-56 flex-shrink-0 rounded-full" :src="pokemon.pic" :alt="`${pokemon.name} Pic`"/>
     <div class="flex justify-between pr-4">
-      <div class="text-2xl font-medium text-gray-900">
-        {{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}
-      </div>
+      <RouterLink :to="`/pokemon/${pokemon.name}/${pokemon.id}`">
+        <div class="text-2xl font-medium text-gray-900 hover:text-blue-400">
+          {{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}
+        </div>
+      </RouterLink>
       <div class="flex gap-3 flex-1 justify-end">
         <BookmarkIconFalse v-if="true" class="h-8 w-6 text-blue-700"/>
         <BookmarkIconTrue v-else class="h-8 w-6 text-blue-700" />

@@ -1,26 +1,21 @@
 <script setup>
 import usePokemon from "@/composables/usePokemon.js"
 import TypeBadge from "@/components/Reusables/TypeBadge.vue"
+import { useRoute } from "vue-router";
 
-const props = defineProps({
-  name: {
-    type: String,
-  }
-})
+const route = useRoute();
 
 const { getPokemon } = usePokemon();
-const pokemon = await getPokemon(props.name)
+const pokemon = await getPokemon(route.params.name)
 console.log(pokemon)
 
 const calcStdHeight = (value) => ((value/10)*39.2701).toFixed(0)
 const calcPounds = (value) => ((value/10) * 2.2).toFixed(1)
 
-
 </script>
 
 <template>
   <div class="min-h-full">
-    
     <main>
       <div class="container mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <!-- Your content -->
