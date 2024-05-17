@@ -22,7 +22,7 @@ const bookmarkToggle = () => {
 
 <template>
   <div class="flex flex-1 flex-col px-5">
-    <img class="m-auto h-56 w-56 flex-shrink-0 rounded-full" :src="pokemon.pic" :alt="`${pokemon.name} Pic`"/>
+    <img class="m-auto h-36 w-36 flex-shrink-0 rounded-full" :src="pokemon.pic" :alt="`${pokemon.name} Pic`"/>
     <div class="flex justify-between">
       <RouterLink :to="`/pokemon/${pokemon.name}/${pokemon.id}`">
         <div class="text-2xl font-medium text-gray-900 hover:text-blue-400">

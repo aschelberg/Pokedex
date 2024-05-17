@@ -9,7 +9,7 @@ const props = defineProps({
 <template>
   <div>
     <div>
-      <div :class="`${pokemonGameVersion}`" id="type_style">
+      <div :class="`${pokemonGameVersion}`" id="type_style" class="text-xs min-w-[768px]:text-md">
         {{ pokemonGameVersion[0].toUpperCase() + pokemonGameVersion.slice(1) }}
       </div>
     </div>

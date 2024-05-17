@@ -85,6 +85,7 @@ watch([searchFilter, filters, page], fetchPokemon, {deep: true})
             <button @click="updatePage('next')" :disabled="!pagination.hasNextPage" class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 border border-blue-600 hover:bg-gray-50 focus-visible:outline-offset-0">Next</button>
           </div>
         </nav>
+        <!-- Pokemon Tiles -->
         <ul role="list" class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <li v-for="pokemon in allPokemon" class="border border-blue-600 col-span-1 flex flex-col rounded-lg bg-white shadow">
             <PokemonCard :pokemon="pokemon"/>
