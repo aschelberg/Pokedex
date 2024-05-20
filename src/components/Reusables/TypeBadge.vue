@@ -18,10 +18,11 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 #type_style {
-  padding: 4px 20px;
+  padding: 2px 10px;
   border-radius: 25px;
   border-style: solid;
   border-color: #000000;
+  font-size: 1rem;
 }
 
 .normal 

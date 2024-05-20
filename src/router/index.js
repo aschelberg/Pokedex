@@ -19,10 +19,10 @@ const router = createRouter({
         title: 'Pokedex',
       }
     }, {
-      path: '/pokemon/:name/:id',
+      path: '/pokemon/:name',
       name: 'pokemonOverview',
       component: PokemonView,
-      meta: {title: 'Pokemon Name Here'}
+      meta: (route) => ({ title: route.params.name })
         
     }, {
       path: '/mypokemon',

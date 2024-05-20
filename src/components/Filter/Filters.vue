@@ -103,10 +103,7 @@ const filteredMove = computed(() =>
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-2 px-3">
-    <div class="max-w rounded-lg border bg-white border-blue-600 hover:bg-blue-300 hover:text-black">
-      <button type="button" @click.stop="clearFilters" class="w-full py-1.5 text-gray-900 sm:text-sm sm:leading-6">Clear Filters</button>
-    </div>
+  <div class="flex w-full justify-between gap-2 md:grid md:grid-cols-1">
     <!-- Type Combobox -->
     <Combobox as="div" v-model="filters.type" @update:modelValue="queryType = ''">
       <ComboboxLabel class="block text-xs font-medium leading-6 text-gray-900 sr-only">Select Type:</ComboboxLabel>
@@ -176,6 +173,9 @@ const filteredMove = computed(() =>
         </ComboboxOptions>
       </div>
     </Combobox>
+    <div class="relative mt-1 max-w rounded-lg hover:text-black">
+      <button type="button" @click.stop="clearFilters" class="w-full rounded-lg border border-blue-600 bg-white py-1.5 text-gray-900 sm:text-sm sm:leading-6 hover:bg-blue-300">Clear Filters</button>
+    </div>
   </div>
 </template>
 

@@ -3,17 +3,15 @@ import usePokemon from "@/composables/usePokemon.js"
 import TypeBadge from "@/components/Reusables/TypeBadge.vue";
 import GameVersionBadge from "@/components/Reusables/GameVersionBadge.vue";
 import { useRoute } from "vue-router";
-import { ref, watch } from "vue";
+import { ref, watch, watchEffect } from "vue";
 import { ArrowLongLeftIcon } from "@heroicons/vue/20/solid";
 import { BookmarkIcon as BookmarkIconFalse } from "@heroicons/vue/24/outline";
 import { BookmarkIcon as BookmarkIconTrue } from "@heroicons/vue/20/solid";
 
 const route = useRoute();
 const bookmark = ref(false);
-
+const pokemon = ref(null)
 const { getPokemon } = usePokemon();
-const pokemon = await getPokemon(route.params.name)
-console.log(pokemon)
 
 const calcStdHeight = (value) => ((value/10)*39.2701).toFixed(0)
 const calcPounds = (value) => ((value/10) * 2.2).toFixed(1)
@@ -23,11 +21,21 @@ const bookmarkToggle = () => {
   console.log(bookmark.value)
 }
 
+// watch(() => route.params.name, async (newPokemon) => {
+//   console.log(newPokemon)
+//   pokemon.value = await getPokemon(newPokemon)
+// }, {immediate : true})
+
+watchEffect(async () => {
+  if(route.params.name) pokemon.value = await getPokemon(route.params.name)
+  route.meta.title = route.params.name
+  console.log(route.meta.title)
+})
 
 </script>
 
 <template>
-  <div class="min-h-full">
+  <div v-if="pokemon" class="min-h-full">
     <main>
       <div class="container mx-auto max-w-7xl pb-6 sm:px-6 lg:px-8">
         <!-- Pokemon Name banner -->
@@ -39,10 +47,10 @@ const bookmarkToggle = () => {
         </div>
         <!-- Your content -->
         <div class="inline justify-center gap-2 shadow-sm shadow-gray-400 sm:flex">
-          <img :src="pokemon.sprites.front_default" :alt="`${pokemon.name} Picture`" class="m-auto w-[100%] h-[75%]">
+          <img :src="pokemon.sprites.front_default" :alt="`${pokemon.name} Picture`" class="m-auto w-[70%] h-[50%]">
           
           <!-- Characteristics -->
-          <div class="container px-4 py-8 mx-auto shadow-sm shadow-gray-400">
+          <div class="container px-6 py-8 mx-auto shadow-sm shadow-gray-400">
             <div class="flex justify-between pb-2">
               <div class="text-2xl font-medium text-gray-900">
                 #{{ pokemon.id.toString().padStart(4, '0') }}
@@ -58,7 +66,7 @@ const bookmarkToggle = () => {
                 <div class="flex justify-between pb-2">
                   <span class="font-semibold pr-2">Height:</span>
                   <div>
-                    <span>{{ Math.floor(calcStdHeight(pokemon.height)/12)  }}' {{ calcStdHeight(pokemon.height)%12 }}"</span>
+                    <span>{{ Math.floor(calcStdHeight(pokemon.height)/12)  }} ' {{ calcStdHeight(pokemon.height)%12 }} "</span>
                     <span class="px-2"> | </span>
                     <span>{{ pokemon.height/10 }} m</span>
                   </div>
@@ -72,19 +80,12 @@ const bookmarkToggle = () => {
                   </div>
                 </div>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between pb-2">
                 <span class="font-semibold">Abilities:</span>
                 <div>
                   <div v-for="a in pokemon.abilities" class="inline-flex px-1">
                       {{ a.ability.name[0].toUpperCase() + a.ability.name.slice(1) }}
                   </div>
-                </div>
-              </div>
-              <div class="flex align-items justify-between">
-                <h2 class="my-auto pr-2 font-semibold">Type:</h2>
-                <div class="flex gap-2 py-2">
-                  <TypeBadge v-for="t in pokemon.types"
-                  :pokemonType="t.type.name"/>
                 </div>
               </div>
             </div>
@@ -100,6 +101,13 @@ const bookmarkToggle = () => {
               </div>
             </div>
 
+            <div class="flex align-items justify-between">
+              <h2 class="my-auto pr-2 font-semibold">Type:</h2>
+              <div class="flex gap-2 py-2">
+                <TypeBadge v-for="t in pokemon.types"
+                :pokemonType="t.type.name"/>
+              </div>
+            </div>
           </div>
 
         </div>

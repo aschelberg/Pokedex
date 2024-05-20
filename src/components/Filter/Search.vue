@@ -15,7 +15,7 @@ const handleSearch = _.debounce((e) => {
 </script>
 
 <template>
-  <form class="pb-4 pl-3 pr-2 flex items-center">
+  <form class="pb-4 flex items-center">
    <label class="sr-only">Search:</label>
    <div class="relative w-full p">
     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">

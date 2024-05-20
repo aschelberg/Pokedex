@@ -21,46 +21,45 @@ const props = defineProps({
   padding: .25rem 1rem;
   border-radius: .25rem;
   border-style: solid;
-  border-color: #000000;
   text-align: center;
 }
 
 .red 
-  {color: #FFFFFF; background: #dc141b}
+  {color: #FFFFFF; background: #d52941}
 .blue
- {color: #FFFFFF; background: rgb(32, 32, 230)}
+ {color: #FFFFFF; background: #0466c8}
 .yellow
- {color: #000000; background: #fbfb00}
+ {color: #000000; background: #ffea00}
 .gold
- {color: #000000; background: #e0d91b}
+ {color: #000000; background: #fdea71}
 .silver
- {color: #000000; background: #C0C0C0}
+ {color: #000000; background: #e9ecef}
 .crystal
- {color: #000000; background: 	#e3cef4}
+ {color: #000000; background: 	#e7c6ff}
 .ruby
- {color: #FFFFFF; background: #ae0401}
+ {color: #FFFFFF; background: #c44536}
 .sapphire
- {color:  #FFFFFF; background: #0F52BA}
+ {color:  #FFFFFF; background: #1b4965}
 .emerald
- {color: #FFFFFF; background: #34d369}
+ {color: #FFFFFF; background: #007200}
 .firered
- {color: #FFFFFF; background: #d52c01}
+ {color: #FFFFFF; background: #ff5714}
 .leafgreen
- {color: #FFFFFF; background: #07cd28}
+ {color: #000000; background: #70e000}
 .diamond
- {color: #000000; background: #AFEEEE}
+ {color: #000000; background: #cae9ff}
 .pearl
- {color: #FFFFFF; background: #a674ae}
+ {color: #000000; background: #bbd0ff}
 .platinum
- {color: #FFFFFF; background: #acacac}
+ {color: #FFFFFF; background: #adb5bd}
 .heartgold
- {color: #000000; background: #b1ab06}
+ {color: #000000; background: #edc531}
 .soulsilver
- {color: #FFFFFF; background: #708090}
+ {color: #FFFFFF; background: #6c757d}
 .black, .black-2
- {color: #FFFFFF; background: #000000}
+ {color: #FFFFFF; background: #212529}
 .white, .white-2
- {color: #000000; border:#000000; border-width: thin;}
+ {color: #000000; background: #f8f9fa; border:#e9ecef; border-width: thin;}
 .colosseum
  {color: #000000; background: #E6E6FA}
 .xd
