@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PokedexView from '@/views/PokedexView.vue'
-import MyPokemon from '@/views/MyPokemon.vue'
+import MyPokemonView from '@/views/MyPokemonView.vue'
 import PokemonView from '@/views/PokemonView.vue'
 
 const router = createRouter({
@@ -27,7 +27,7 @@ const router = createRouter({
     }, {
       path: '/mypokemon',
       name: 'mypokemon',
-      component: MyPokemon,
+      component: MyPokemonView,
       meta: {
         title: 'My Pokemon',
       }

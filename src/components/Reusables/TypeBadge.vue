@@ -1,9 +1,9 @@
 <script setup>
 const props = defineProps({
   pokemonType: {
-    type: String
-  }
-})
+    type: String,
+  },
+});
 </script>
 
 <template>
@@ -25,46 +25,88 @@ const props = defineProps({
   font-size: 1rem;
 }
 
-.normal 
-  {color: #000000; background: #D2B48C}
-.fighting
- {color: #FFFFFF; background: #DC143C}
-.flying
- {color: #000000; background: #87CEFA}
-.poison
- {color: #FFFFFF; background: #800080}
-.ground
- {color: #000000; background: #999999}
-.rock
- {color: #000000; background: 	#8B4513}
-.bug
- {color: #FFFFFF; background: #483D8B}
-.ghost
- {color:  #000000; background: #DCDCDC}
-.steel
- {color: #FFFFFF; background: #C0C0C0}
-.fire
- {color: #FFFFFF; background: #FF8C00}
-.water
- {color: #FFFFFF; background: #00008B}
-.grass
- {color: #000000; background: #228B22}
-.electric
- {color: #000000; background: #FFFF00}
-.psychic
- {color: #FFFFFF; background: #C71585}
-.ice
- {color: #000000; background: #AFEEEE}
-.dragon
- {color: #000000; background: #708090}
-.dark
- {color: #FFFFFF; background: #000000}
-.fairy
- {color: #000000; background: #FFC0CB}
-.stellar
- {color: #000000; background: #E6E6FA}
-.unknown
- {color: #FFFFFF; background: #000000}
-.shadow
- {color: #FFFFFF; background: #454545}
+.normal {
+  color: #000000;
+  background: #d2b48c;
+}
+.fighting {
+  color: #ffffff;
+  background: #dc143c;
+}
+.flying {
+  color: #000000;
+  background: #87cefa;
+}
+.poison {
+  color: #ffffff;
+  background: #800080;
+}
+.ground {
+  color: #000000;
+  background: #999999;
+}
+.rock {
+  color: #000000;
+  background: #8b4513;
+}
+.bug {
+  color: #ffffff;
+  background: #483d8b;
+}
+.ghost {
+  color: #000000;
+  background: #dcdcdc;
+}
+.steel {
+  color: #ffffff;
+  background: #c0c0c0;
+}
+.fire {
+  color: #ffffff;
+  background: #ff8c00;
+}
+.water {
+  color: #ffffff;
+  background: #00008b;
+}
+.grass {
+  color: #000000;
+  background: #228b22;
+}
+.electric {
+  color: #000000;
+  background: #ffff00;
+}
+.psychic {
+  color: #ffffff;
+  background: #c71585;
+}
+.ice {
+  color: #000000;
+  background: #afeeee;
+}
+.dragon {
+  color: #000000;
+  background: #708090;
+}
+.dark {
+  color: #ffffff;
+  background: #000000;
+}
+.fairy {
+  color: #000000;
+  background: #ffc0cb;
+}
+.stellar {
+  color: #000000;
+  background: #e6e6fa;
+}
+.unknown {
+  color: #ffffff;
+  background: #000000;
+}
+.shadow {
+  color: #ffffff;
+  background: #454545;
+}
 </style>
