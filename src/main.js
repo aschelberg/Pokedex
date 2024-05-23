@@ -1,14 +1,21 @@
-import '@/assets/styles.css'
+import "@/assets/styles.css";
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia';
+import { createApp } from "vue";
+import { createPinia } from "pinia";
 
-import App from './App.vue'
-import router from './router'
+import { createEarthoOne } from "@eartho/one-client-vue";
 
-const app = createApp(App)
+import App from "./App.vue";
+import router from "./router";
 
-app.use(createPinia())
-app.use(router)
+const app = createApp(App);
 
-app.mount('#app')
+app.use(createPinia());
+app.use(router);
+app.use(
+  createEarthoOne({
+    client_id: import.meta.env.NPM_CLIENT_ID,
+  })
+);
+
+app.mount("#app");

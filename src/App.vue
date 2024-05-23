@@ -5,7 +5,7 @@ import AuthenticatedLayout from "@/components/AuthenticatedLayout/AuthenticatedL
 
 <template>
  <div class="min-h-screen font-Konit">
-    <AuthenticatedLayout>
+    <AuthenticatedLayout v-if="false">
       <RouterView v-slot="{ Component }">
         <template v-if="Component">
           <Transition mode="out-in">
@@ -24,7 +24,25 @@ import AuthenticatedLayout from "@/components/AuthenticatedLayout/AuthenticatedL
         </template>
       </RouterView>
     </AuthenticatedLayout>
-   
+    <div v-else>
+      <RouterView v-slot="{ Component }">
+        <template v-if="Component">
+          <Transition mode="out-in">
+            <KeepAlive>
+              <Suspense>
+                <!-- main content -->
+                <component :is="Component"></component>
+
+                <!-- loading state -->
+                <template #fallback>
+                  Loading...
+                </template>
+              </Suspense>
+            </KeepAlive>
+          </Transition>
+        </template>
+      </RouterView>
+    </div>
     <!-- <BaseConfirmation
       v-if="confirmation"
       v-model="confirmation.formData"

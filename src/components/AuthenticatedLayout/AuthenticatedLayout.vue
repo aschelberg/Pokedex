@@ -30,18 +30,11 @@ const userNavigation = [
 const navigation = [
   { name: "Pokedex", href: "/pokedex" },
   { name: "My Pokemon", href: "/mypokemon" },
+  { name: "Sandbox", href: "/sandbox"}
 ];
 </script>
 
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-gray-100">
-    <body class="h-full">
-    ```
-  -->
   <div class="min-h-full">
     <Disclosure as="nav" class="bg-blue-600" v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -51,7 +44,7 @@ const navigation = [
               <img
                 class="h-20 w-36"
                 src="@/assets/PokemonLogo.png"
-                alt="Pokemon Logo"
+                alt="Pokemon Pokedex"
               />
             </div>
             <div class="hidden md:block">

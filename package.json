@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@eartho/one-client-vue": "^2.0.3",
     "@headlessui/vue": "^1.7.22",
     "@heroicons/vue": "^2.1.3",
     "axios": "^1.6.8",
