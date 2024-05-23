@@ -5,7 +5,10 @@ const useType = () => {
 
   const getType = async () => {
     const { data } = await request(
-      `/type/?offset=0&limit=21`
+      `/type/?offset=0&limit=21`,
+      {
+        baseURL: 'https://pokeapi.co/api/v2'
+      }
     )
     return data
   }

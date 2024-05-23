@@ -1,11 +1,16 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { storeToRefs } from 'pinia';
 import AuthenticatedLayout from "@/components/AuthenticatedLayout/AuthenticatedLayout.vue"
+import useUserStore from '@/stores/user.store.js';
+
+const userStore = useUserStore();
+const { isAuthenticated } = storeToRefs(userStore);
 </script>
 
 <template>
  <div class="min-h-screen font-Konit">
-    <AuthenticatedLayout v-if="false">
+    <AuthenticatedLayout v-if="isAuthenticated">
       <RouterView v-slot="{ Component }">
         <template v-if="Component">
           <Transition mode="out-in">

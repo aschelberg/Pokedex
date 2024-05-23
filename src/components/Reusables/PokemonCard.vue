@@ -15,7 +15,7 @@ const props = defineProps({
 
 const bookmarkBool = ref(null);
 const savedPokemon = ref([]);
-savedPokemon.value = JSON.parse(localStorage.getItem("savedPokemon"));
+savedPokemon.value = localStorage.getItem("savedPokemon") ? JSON.parse(localStorage.getItem("savedPokemon")) : [];
 
 const updateBookmark = () => {
   const pokeIndex = savedPokemon.value.find(

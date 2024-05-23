@@ -5,7 +5,10 @@ const useMoves = () => {
 
   const getMoves = async () => {
     const { data } = await request(
-      `/move/?offset=0&limit=937`
+      `/move/?offset=0&limit=937`,
+      {
+        baseURL: 'https://pokeapi.co/api/v2'
+      }
     )
     return data
   }

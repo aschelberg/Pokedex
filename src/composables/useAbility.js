@@ -5,7 +5,10 @@ const useAbility = () => {
 
   const getAbility = async () => {
     const { data } = await request(
-      `/ability/?offset=0&limit=367`
+      `/ability/?offset=0&limit=367`,
+      {
+        baseURL: 'https://pokeapi.co/api/v2'
+      }
     )
     return data
   }

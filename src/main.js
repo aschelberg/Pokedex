@@ -11,10 +11,13 @@ import router from "./router";
 const app = createApp(App);
 
 app.use(createPinia());
-app.use(router);
+app.use(router(app));
 app.use(
   createEarthoOne({
-    client_id: import.meta.env.NPM_CLIENT_ID,
+    clientId: import.meta.env.VITE_EARTHO_CLIENT_ID,
+    authorizationParams: {
+      redirect_uri: window.location.origin,
+    }
   })
 );
 

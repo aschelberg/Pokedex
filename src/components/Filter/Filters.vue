@@ -44,39 +44,25 @@ watch(
 const { getType } = useType();
 const fetchTypes = async () => {
   const pokemonTypes = await getType();
-  localStorage.setItem("types", JSON.stringify(pokemonTypes.results));
+  types.value = pokemonTypes.results;
 };
-if (localStorage.getItem("types")) {
-  types.value = JSON.parse(localStorage.getItem("types"));
-} else {
-  fetchTypes();
-}
+fetchTypes();
 
 // fetch and set abilities to local storage for filters
 const { getAbility } = useAbility();
 const fetchAbility = async () => {
   const pokemonAbility = await getAbility();
-  localStorage.setItem("ability", JSON.stringify(pokemonAbility.results));
+  abilities.value = pokemonAbility.results;
 };
-
-if (localStorage.getItem("ability")) {
-  abilities.value = JSON.parse(localStorage.getItem("ability"));
-} else {
-  fetchAbility();
-}
+fetchAbility();
 
 // fetch and set moves to local storage for filters
 const { getMoves } = useMoves();
 const fetchMoves = async () => {
   const pokemonMoves = await getMoves();
-  localStorage.setItem("moves", JSON.stringify(pokemonMoves.results));
+  moves.value = pokemonMoves.results;
 };
-
-if (localStorage.getItem("moves")) {
-  moves.value = JSON.parse(localStorage.getItem("moves"));
-} else {
-  fetchMoves();
-}
+fetchMoves();
 
 const queryType = ref("");
 const queryAbility = ref("");
