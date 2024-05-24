@@ -1,12 +1,33 @@
 <script setup>
-import MyPokemon from "@/components/MyPokemon.vue";
+import usePokemon from '@/composables/usePokemon';
+import PokemonCard from '@/components/Reusables/PokemonCard.vue';
+import { ref } from 'vue';
+
+const savedPokemon = ref([])
+const { myPokemon } = async () => {
+  savedPokemon.value = await myPokemon();
+}
+
+
 </script>
 
 <template>
-  <main>
-    <!-- <MyPokemon /> -->
-    My Pokemon here
-  </main>
+  <div v-if="!savedPokemon">
+    <h3>No pokemon have been bookmarked.</h3>
+  </div>
+  <div>
+    <ul role="list" class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+      <li
+        v-for="pokemon in savedPokemon"
+        class="border border-blue-600 col-span-1 flex flex-col rounded-lg bg-white shadow"
+      >
+        <PokemonCard
+          :pokemon="pokemon.pokemon"
+          :savedPokemon="savedPokemon"
+        />
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

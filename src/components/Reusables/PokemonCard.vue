@@ -1,51 +1,38 @@
 <script setup>
+import usePokemon from "@/composables/usePokemon";
 import TypeBadge from "@/components/Reusables/TypeBadge.vue";
 import { BookmarkIcon as BookmarkIconFalse } from "@heroicons/vue/24/outline";
 import { BookmarkIcon as BookmarkIconTrue } from "@heroicons/vue/20/solid";
-import { computed, ref, watch, watchEffect } from "vue";
+import { computed, ref } from "vue";
+
+const emit = defineEmits(['updated'])
 
 const props = defineProps({
   pokemon: {
     type: Object,
   },
-  bookmarked: {
-    type: Boolean,
-  },
+  savedPokemon: {
+    type: Array,
+    default: []
+  }
 });
 
-const bookmarkBool = ref(null);
-const savedPokemon = ref([]);
-savedPokemon.value = localStorage.getItem("savedPokemon") ? JSON.parse(localStorage.getItem("savedPokemon")) : [];
+const { savePokemon, removePokemon } = usePokemon();
 
-const updateBookmark = () => {
-  const pokeIndex = savedPokemon.value.find(
-    (t) => t.pokemon.name === props.pokemon.name
-  );
-  if (pokeIndex) bookmarkBool.value = pokeIndex.bookmarked;
+const isSaved = computed(() => {
+  return props.savedPokemon.find(p => p.id === props.pokemon.id);
+});
+
+const handleSave = async (id) => {
+  await savePokemon(id);
+  emit('updated')
 };
 
-updateBookmark();
-
-const bookmarkToggle = () => {
-  updateBookmark();
-  if (bookmarkBool.value) {
-    const pokeIndex = savedPokemon.value.findIndex(
-      (t) => t.pokemon.name === props.pokemon.name
-    );
-    savedPokemon.value.splice(pokeIndex, 1);
-    localStorage.setItem("savedPokemon", JSON.stringify(savedPokemon.value));
-    bookmarkBool.value = false;
-  } else {
-    savedPokemon.value.push({
-      pokemon: props.pokemon,
-      bookmarked: true,
-    });
-    localStorage.setItem("savedPokemon", JSON.stringify(savedPokemon.value));
-    bookmarkBool.value = true;
-  }
+const handleRemove = async (id) => {
+  await removePokemon(id);
+  emit('updated')
 };
 
-watch(bookmarkBool, updateBookmark);
 </script>
 
 <template>
@@ -62,17 +49,13 @@ watch(bookmarkBool, updateBookmark);
         </div>
       </RouterLink>
       <div class="flex gap-3 flex-1 justify-end">
-        <i class="fa-light fa-bookmark"></i>
-        <BookmarkIconFalse
-          v-if="!bookmarkBool"
-          class="h-8 w-6 text-blue-700 cursor-pointer"
-          @click="bookmarkToggle()"
-        />
-        <BookmarkIconTrue
-          v-else
-          class="h-8 w-6 text-blue-700 cursor-pointer"
-          @click="bookmarkToggle(pokemon.name)"
-        />
+        <button v-if="!isSaved" @click="handleSave(pokemon.id)">
+          <BookmarkIconFalse class="h-8 w-6 text-blue-700 cursor-pointer" />
+        </button>
+        <button v-else @click="handleRemove(pokemon.id)">
+          <BookmarkIconTrue class="h-8 w-6 text-blue-700 cursor-pointer" />
+        </button>
+        
       </div>
     </div>
     <div>

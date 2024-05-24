@@ -1,4 +1,4 @@
-import useApi from "@/composables/useApi.js";
+import useApi from '@/composables/useApi.js';
 
 const usePokemon = () => {
   const { request } = useApi();
