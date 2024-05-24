@@ -17,6 +17,31 @@ const usePokemon = () => {
     return data
   }
 
+  const myPokemon = async () => {
+    const { data } = await request('/pokemon/me/pokemon')
+    return data;
+  };
+
+  const savePokemon = async (pokemonId) => {
+    const { data } = await request('/pokemon/me/pokemon/add', {
+      method: 'POST',
+      data: {
+        pokemonId
+      }
+    });
+    return data;
+  };
+
+  const removePokemon = async (pokemonId) => {
+    const { data } = await request('/pokemon/me/pokemon/remove', {
+      method: 'POST',
+      data: {
+        pokemonId
+      }
+    });
+    return data;
+  };
+
   const getPokemon = async (pokemonId) => {
     const { data } = await request(`/pokemon/${pokemonId}`, {
       baseURL: 'https://pokeapi.co/api/v2'
@@ -26,6 +51,9 @@ const usePokemon = () => {
 
   return {
     getAllPokemon,
+    myPokemon,
+    savePokemon,
+    removePokemon,
     getPokemon
   };
 };
