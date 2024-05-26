@@ -1,8 +1,8 @@
 <script setup>
-import useType from "@/composables/useType.js";
-import useAbility from "@/composables/useAbility.js";
-import useMoves from "@/composables/useMoves.js";
-import { CheckIcon, ChevronDownIcon } from "@heroicons/vue/20/solid";
+import useType from '@/composables/useType.js';
+import useAbility from '@/composables/useAbility.js';
+import useMoves from '@/composables/useMoves.js';
+import { CheckIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
 import {
   Combobox,
   ComboboxButton,
@@ -10,22 +10,22 @@ import {
   ComboboxLabel,
   ComboboxOption,
   ComboboxOptions,
-} from "@headlessui/vue";
-import { ref, computed, watch } from "vue";
+} from '@headlessui/vue';
+import { ref, computed, watch } from 'vue';
 
 const filters = ref({
-  type: "",
-  ability: "",
-  move: "",
+  type: '',
+  ability: '',
+  move: '',
 });
 
-const emit = defineEmits(["updateFilters", "clearFilters"]);
+const emit = defineEmits(['updateFilters', 'clearFilters']);
 
 const clearFilters = () => {
-  filters.value.type = "";
-  filters.value.ability = "";
-  filters.value.move = "";
-  emit("clearFilters", filters.value);
+  filters.value.type = '';
+  filters.value.ability = '';
+  filters.value.move = '';
+  emit('clearFilters', filters.value);
 };
 
 const types = ref([]);
@@ -35,7 +35,7 @@ const moves = ref([]);
 watch(
   filters,
   () => {
-    emit("updateFilters", filters.value);
+    emit('updateFilters', filters.value);
   },
   { deep: true }
 );
@@ -64,25 +64,25 @@ const fetchMoves = async () => {
 };
 fetchMoves();
 
-const queryType = ref("");
-const queryAbility = ref("");
-const queryMove = ref("");
+const queryType = ref('');
+const queryAbility = ref('');
+const queryMove = ref('');
 const filteredType = computed(() =>
-  queryType.value === ""
+  queryType.value === ''
     ? types.value
     : types.value.filter((type) => {
         return type.name.includes(queryType.value.toLowerCase());
       })
 );
 const filteredAbility = computed(() =>
-  queryAbility.value === ""
+  queryAbility.value === ''
     ? abilities.value
     : abilities.value.filter((ability) => {
         return ability.name.includes(queryAbility.value.toLowerCase());
       })
 );
 const filteredMove = computed(() =>
-  queryMove.value === ""
+  queryMove.value === ''
     ? moves.value
     : moves.value.filter((move) => {
         return move.name.includes(queryMove.value.toLowerCase());

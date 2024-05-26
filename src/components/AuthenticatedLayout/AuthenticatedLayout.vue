@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute } from 'vue-router';
 import {
   Disclosure,
   DisclosureButton,
@@ -8,29 +8,28 @@ import {
   MenuButton,
   MenuItem,
   MenuItems,
-} from "@headlessui/vue";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
-import { ref, watchEffect } from "vue";
+} from '@headlessui/vue';
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { ref, computed, watchEffect } from 'vue';
 
 const route = useRoute();
 
 const user = {
-  name: "Andrew Schelberg",
-  email: "as@example.com",
+  name: 'Andrew Schelberg',
+  email: 'as@example.com',
   imageUrl:
-    "https://images.unsplash.com/photo-1627693685101-687bf0eb1222?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGlrYWNodXxlbnwwfHwwfHx8MA%3D%3D",
+    'https://images.unsplash.com/photo-1627693685101-687bf0eb1222?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGlrYWNodXxlbnwwfHwwfHx8MA%3D%3D',
 };
 
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "/logout" },
+  { name: 'Your Profile', href: '#' },
+  { name: 'Settings', href: '#' },
+  { name: 'Sign out', href: '/logout' },
 ];
 
 const navigation = [
-  { name: "Pokedex", href: "/pokedex" },
-  { name: "My Pokemon", href: "/mypokemon" },
-  { name: "Sandbox", href: "/sandbox"}
+  { name: 'Pokedex', href: '/pokedex' },
+  { name: 'My Pokemon', href: '/mypokemon' },
 ];
 </script>
 
@@ -197,7 +196,7 @@ const navigation = [
         <h1
           class="flex justify-center py-4 text-5xl font-semibold leading-6 text-blue-600"
         >
-          {{ route.meta?.title }}
+          {{ route.meta.title !== 'Pokemon View' ? route.meta.title : route.params.name.toUpperCase() }}
         </h1>
       </div>
     </header>

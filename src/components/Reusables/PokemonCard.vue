@@ -1,9 +1,9 @@
 <script setup>
-import usePokemon from "@/composables/usePokemon";
-import TypeBadge from "@/components/Reusables/TypeBadge.vue";
-import { BookmarkIcon as BookmarkIconFalse } from "@heroicons/vue/24/outline";
-import { BookmarkIcon as BookmarkIconTrue } from "@heroicons/vue/20/solid";
-import { computed, ref } from "vue";
+import usePokemon from '@/composables/usePokemon';
+import TypeBadge from '@/components/Reusables/TypeBadge.vue';
+import { BookmarkIcon as BookmarkIconFalse } from '@heroicons/vue/24/outline';
+import { BookmarkIcon as BookmarkIconTrue } from '@heroicons/vue/20/solid';
+import { computed, ref } from 'vue';
 
 const emit = defineEmits(['updated'])
 
@@ -43,7 +43,7 @@ const handleRemove = async (id) => {
       :alt="`${pokemon.name} Pic`"
     />
     <div class="flex justify-between">
-      <RouterLink :to="`/pokemon/${pokemon.name}`">
+      <RouterLink :to="`/pokedex/pokemon/${pokemon.name}`">
         <div class="text-2xl font-medium text-gray-900 hover:text-blue-400">
           {{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}
         </div>

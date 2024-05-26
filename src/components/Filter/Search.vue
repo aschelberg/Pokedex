@@ -1,15 +1,15 @@
 <script setup>
-import _ from "lodash";
-import { MagnifyingGlassIcon } from "@heroicons/vue/24/outline";
+import _ from 'lodash';
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
   modelValue: String,
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
 const handleSearch = _.debounce((e) => {
-  emit("update:modelValue", e.target.value);
+  emit('update:modelValue', e.target.value);
 }, 500);
 </script>
 

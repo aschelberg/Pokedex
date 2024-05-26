@@ -21,7 +21,7 @@ const { getPokemon, getAllPokemon, myPokemon } = usePokemon();
 
 const savedPokemon = ref([])
 const allPokemon = ref([]);
-const searchFilter = ref("");
+const searchFilter = ref('');
 const filters = ref({});
 const page = ref(1);
 const limit = ref(9);
@@ -68,13 +68,13 @@ const updatePage = (pageIndicator) => {
 
 const updateFilters = (updatedFilters) => {
   filters.value = updatedFilters;
+  page.value = 1
 };
 const clearFilters = (updatedFilters) => {
   searchFilter.value = "";
   filters.value = updatedFilters;
+  page.value = 1
 };
-
-
 
 watch([searchFilter, filters, page], fetchPokemon, { deep: true });
 

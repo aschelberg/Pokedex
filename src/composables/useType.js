@@ -1,4 +1,4 @@
-import useApi from "@/composables/useApi.js";
+import useApi from '@/composables/useApi.js';
 
 const useType = () => {
   const { request } = useApi();

@@ -1,36 +1,46 @@
 <script setup>
-import usePokemon from "@/composables/usePokemon.js";
-import TypeBadge from "@/components/Reusables/TypeBadge.vue";
-import GameVersionBadge from "@/components/Reusables/GameVersionBadge.vue";
-import { useRoute } from "vue-router";
-import { ref, watch, watchEffect } from "vue";
-import { ArrowLongLeftIcon } from "@heroicons/vue/20/solid";
-import { BookmarkIcon as BookmarkIconFalse } from "@heroicons/vue/24/outline";
-import { BookmarkIcon as BookmarkIconTrue } from "@heroicons/vue/20/solid";
+import usePokemon from '@/composables/usePokemon.js';
+import TypeBadge from '@/components/Reusables/TypeBadge.vue';
+import GameVersionBadge from '@/components/Reusables/GameVersionBadge.vue';
+import { useRoute } from 'vue-router';
+import { ref, computed, watchEffect, watch } from 'vue';
+import { ArrowLongLeftIcon } from '@heroicons/vue/20/solid';
+import { BookmarkIcon as BookmarkIconFalse } from '@heroicons/vue/24/outline';
+import { BookmarkIcon as BookmarkIconTrue } from '@heroicons/vue/20/solid';
 
 const route = useRoute();
-const bookmark = ref(false);
 const pokemon = ref(null);
-const { getPokemon } = usePokemon();
+const savedPokemon = ref([])
+const isSaved = ref(null);
+const { getPokemon, myPokemon, savePokemon, removePokemon } = usePokemon();
 
 const calcStdHeight = (value) => ((value / 10) * 39.2701).toFixed(0);
 const calcPounds = (value) => ((value / 10) * 2.2).toFixed(1);
 
-const bookmarkToggle = () => {
-  bookmark.value = !bookmark.value;
-  console.log(bookmark.value);
+const fetchPokemon = async () => pokemon.value = await getPokemon(route.params.name);
+fetchPokemon()
+
+const fetchSavedPokemon = async () => {
+  savedPokemon.value = await myPokemon();
+  isSaved.value = savedPokemon.value.find(p => p.id === pokemon.value.id)
+}
+fetchSavedPokemon()
+
+const handleSave = async (id) => {
+  await savePokemon(id);
+  fetchSavedPokemon()
 };
 
-// watch(() => route.params.name, async (newPokemon) => {
-//   console.log(newPokemon)
-//   pokemon.value = await getPokemon(newPokemon)
-// }, {immediate : true})
+const handleRemove = async (id) => {
+  await removePokemon(id);
+  fetchSavedPokemon()
+};
 
 watchEffect(async () => {
-  if (route.params.name) pokemon.value = await getPokemon(route.params.name);
-  route.meta.title = route.params.name;
-  console.log(route.meta.title);
+    if (route.params.name) pokemon.value = await getPokemon(route.params.name);
+    fetchSavedPokemon()
 });
+
 </script>
 
 <template>
@@ -39,7 +49,7 @@ watchEffect(async () => {
       <div class="container mx-auto max-w-7xl pb-6 sm:px-6 lg:px-8">
         <!-- Pokemon Name banner -->
         <div class="flex pb-6 border-b-2">
-          <RouterLink :to="'/'">
+          <RouterLink :to="'/pokedex'">
             <button
               class="inline-flex items-center gap-x-1.5 rounded-md bg-white border border-grey-400 px-2.5 py-1.5 text-sm font-semibold text-black shadow-sm hover:bg-blue-400 focus-visible:outline-offset-0"
             >
@@ -66,14 +76,15 @@ watchEffect(async () => {
               </div>
               <div
                 class="flex gap-1 align-items hover:text-grey-500 justify-end cursor-pointer"
-                @click="bookmarkToggle()"
               >
-                <h1 class="my-auto text-blue-700">Add to Bookmark</h1>
-                <BookmarkIconFalse
-                  v-if="!bookmark"
-                  class="h-8 w-6 text-blue-700"
-                />
-                <BookmarkIconTrue v-else class="h-8 w-6 text-blue-700" />
+                <h1 v-if="!isSaved" class="my-auto text-blue-700">Add to Saved</h1>
+                <h1 v-else class="my-auto text-blue-700">Saved</h1>
+                <button v-if="!isSaved" @click="handleSave(pokemon.id)">
+                  <BookmarkIconFalse class="h-8 w-6 text-blue-700 cursor-pointer" />
+                </button>
+                <button v-else @click="handleRemove(pokemon.id)">
+                  <BookmarkIconTrue class="h-8 w-6 text-blue-700 cursor-pointer" />
+                </button>
               </div>
             </div>
             <div class="grid grid-cols-1 gap-2">

@@ -1,7 +1,7 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import AuthenticatedLayout from "@/components/AuthenticatedLayout/AuthenticatedLayout.vue"
+import AuthenticatedLayout from '@/components/AuthenticatedLayout/AuthenticatedLayout.vue';
 import useUserStore from '@/stores/user.store.js';
 
 const userStore = useUserStore();

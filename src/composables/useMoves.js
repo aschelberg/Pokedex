@@ -1,4 +1,4 @@
-import useApi from "@/composables/useApi.js";
+import useApi from '@/composables/useApi.js';
 
 const useMoves = () => {
   const { request } = useApi();
