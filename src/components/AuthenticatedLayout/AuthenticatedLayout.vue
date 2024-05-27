@@ -1,5 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
+import useUserStore from '@/stores/user.store';
+import { ref, computed, watchEffect } from 'vue';
 import {
   Disclosure,
   DisclosureButton,
@@ -10,16 +12,10 @@ import {
   MenuItems,
 } from '@headlessui/vue';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { ref, computed, watchEffect } from 'vue';
 
 const route = useRoute();
-
-const user = {
-  name: 'Andrew Schelberg',
-  email: 'as@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1627693685101-687bf0eb1222?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGlrYWNodXxlbnwwfHwwfHx8MA%3D%3D',
-};
+const { user } = useUserStore()
+console.log(user)
 
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -85,7 +81,7 @@ const navigation = [
                     <span class="sr-only">Open user menu</span>
                     <img
                       class="h-8 w-8 rounded-full"
-                      :src="user.imageUrl"
+                      :src="user.photoURL"
                       alt=""
                     />
                   </MenuButton>
@@ -158,11 +154,11 @@ const navigation = [
         <div class="border-t border-gray-700 pb-3 pt-4">
           <div class="flex items-center px-5">
             <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
+              <img class="h-10 w-10 rounded-full" :src="user.photoURL" alt="" />
             </div>
             <div class="ml-3">
               <div class="text-base font-medium text-white">
-                {{ user.name }}
+                {{ user.displayName }}
               </div>
               <div class="text-sm font-medium text-gray-400">
                 {{ user.email }}
