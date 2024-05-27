@@ -91,7 +91,7 @@ const filteredMove = computed(() =>
 </script>
 
 <template>
-  <div class="flex w-full justify-between gap-2 md:grid md:grid-cols-1">
+  <div class="w-full justify-between gap-2 md:grid md:grid-cols-1">
     <!-- Type Combobox -->
     <Combobox
       as="div"

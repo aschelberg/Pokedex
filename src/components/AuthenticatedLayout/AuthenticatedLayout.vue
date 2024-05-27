@@ -15,7 +15,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 
 const route = useRoute();
 const { user } = useUserStore()
-console.log(user)
+console.log(user.displayName)
 
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -82,7 +82,7 @@ const navigation = [
                     <img
                       class="h-8 w-8 rounded-full"
                       :src="user.photoURL"
-                      alt=""
+                      alt="Profile Pic"
                     />
                   </MenuButton>
                 </div>
@@ -170,7 +170,7 @@ const navigation = [
             >
               <span class="absolute -inset-1.5" />
               <span class="sr-only">View notifications</span>
-              <BellIcon class="h-6 w-6" aria-hidden="true" />
+              <!-- <BellIcon class="h-6 w-6" aria-hidden="true" /> -->
             </button>
           </div>
           <div class="mt-3 space-y-1 px-2">

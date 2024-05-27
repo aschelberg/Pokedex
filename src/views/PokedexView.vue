@@ -137,7 +137,7 @@ watch([searchFilter, filters, page], fetchPokemon, { deep: true });
                     <fieldset>
                       <legend class="w-full px-2">
                         <DisclosureButton
-                          class="flex w-full items-center justify-between p-2 text-gray-400 hover:text-gray-500"
+                          class="flex w-full items-center justify-between text-gray-400 hover:text-gray-500"
                         >
                           <Filters
                             @updateFilters="updateFilters"
@@ -154,20 +154,20 @@ watch([searchFilter, filters, page], fetchPokemon, { deep: true });
         </Dialog>
       </TransitionRoot>
 
-      <main class="mx-auto px-1 lg:max-w-7xl lg:px-8">
+      <main class="mx-auto px-6 lg:max-w-7xl lg:px-8">
         <!-- search -->
         <div>
           <Search v-model="searchFilter" />
         </div>
         <div
-          class="pb-12 pt-4 sm:grid sm:grid-cols-3 md:grid-cols-5 md:gap-x-2 lg:grid-cols-6"
+          class="pb-4 py-2 sm:grid sm:grid-cols-3 md:grid-cols-5 md:gap-x-2 lg:grid-cols-6"
         >
           <aside>
             <h2 class="sr-only">Filters</h2>
 
             <button
               type="button"
-              class="inline-flex items-center md:hidden px-2"
+              class="inline-flex py-2 pl-1 items-center md:hidden"
               @click="mobileFiltersOpen = true"
             >
               <span class="text-sm font-medium text-gray-700">Filters</span>
@@ -201,7 +201,7 @@ watch([searchFilter, filters, page], fetchPokemon, { deep: true });
           >
             <h2 id="product-heading" class="sr-only">Pokemon</h2>
 
-            <div class="pl-2 col-span-5">
+            <div class="col-span-5">
               <!-- Pagination -->
               <div
                 class="flex items-center justify-between bg-white pb-3"
@@ -244,7 +244,7 @@ watch([searchFilter, filters, page], fetchPokemon, { deep: true });
                 </div>
               </div>
               <!-- Pokemon Tiles -->
-              <ul role="list" class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+              <ul role="list" class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 md:pl-2">
                 <li
                   v-for="pokemon in allPokemon"
                   class="border border-blue-600 col-span-1 flex flex-col rounded-lg bg-white shadow"

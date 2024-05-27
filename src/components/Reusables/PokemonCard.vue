@@ -36,7 +36,7 @@ const handleRemove = async (id) => {
 </script>
 
 <template>
-  <div class="flex flex-1 flex-col px-5">
+  <div class="flex flex-1 flex-col px-4 md:px-5">
     <img
       class="m-auto h-36 w-36 flex-shrink-0 rounded-full"
       :src="pokemon.pic"
@@ -48,7 +48,7 @@ const handleRemove = async (id) => {
           {{ pokemon.name[0].toUpperCase() + pokemon.name.slice(1) }}
         </div>
       </RouterLink>
-      <div class="flex gap-3 flex-1 justify-end">
+      <div class="flex gap-3 justify-end">
         <button v-if="!isSaved" @click="handleSave(pokemon.id)">
           <BookmarkIconFalse class="h-8 w-6 text-blue-700 cursor-pointer" />
         </button>

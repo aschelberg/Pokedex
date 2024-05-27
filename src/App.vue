@@ -6,6 +6,7 @@ import useUserStore from '@/stores/user.store.js';
 
 const userStore = useUserStore();
 const { isAuthenticated } = storeToRefs(userStore);
+
 </script>
 
 <template>
@@ -83,5 +84,9 @@ const { isAuthenticated } = storeToRefs(userStore);
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
+}
+
+.LoginView {
+  background-color: grey;
 }
 </style>
