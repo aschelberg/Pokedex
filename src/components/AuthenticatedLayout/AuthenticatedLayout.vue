@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import useUserStore from '@/stores/user.store';
-import { ref, computed, watchEffect } from 'vue';
+import { storeToRefs } from 'pinia';
 import {
   Disclosure,
   DisclosureButton,
@@ -15,7 +15,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 
 const route = useRoute();
 const { user } = useUserStore()
-console.log(user.displayName)
+const userStore = storeToRefs(user)
 
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -160,7 +160,7 @@ const navigation = [
               <div class="text-base font-medium text-white">
                 {{ user.displayName }}
               </div>
-              <div class="text-sm font-medium text-gray-400">
+              <div class="text-sm font-medium text-white">
                 {{ user.email }}
               </div>
             </div>
@@ -179,7 +179,7 @@ const navigation = [
               :key="item.name"
               as="a"
               :href="item.href"
-              class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-red-500 hover:text-white"
+              class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-red-500 hover:text-white"
               >{{ item.name }}</DisclosureButton
             >
           </div>
