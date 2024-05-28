@@ -8,7 +8,7 @@ const useUserStore = defineStore('user', () => {
 
   const login = async () => {
     connectWithRedirect({
-      accessId: 'kAVLaL4Z4BEiyH02WnMh',
+      accessId: import.meta.env.VITE_EARTHO_ACCESS_ID,
       enabledAuthProviders: ['google']
     });
   };
