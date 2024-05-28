@@ -14,7 +14,7 @@ app.use(createPinia());
 app.use(router(app));
 app.use(
   createEarthoOne({
-    clientId: import.meta.env.VITE_EARTHO_CLIENT_ID,
+    clientId: 'XqxDlzp15Xmx7IV64NAx',
     authorizationParams: {
       redirect_uri: window.location.origin,
     }
