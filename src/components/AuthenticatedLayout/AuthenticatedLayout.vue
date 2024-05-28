@@ -14,8 +14,8 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 
 const route = useRoute();
-const { user } = useUserStore()
-const userStore = storeToRefs(user)
+const { user } = storeToRefs(useUserStore())
+
 
 const userNavigation = [
   { name: 'Your Profile', href: '#' },

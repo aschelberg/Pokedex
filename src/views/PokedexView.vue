@@ -214,7 +214,8 @@ watch([searchFilter, filters, page], fetchPokemon, { deep: true });
                       limit * page - (limit - 1)
                     }}</span>
                     to
-                    <span class="font-medium">{{ limit * page }}</span>
+                    <span v-if="pagination.totalDocs > limit" class="font-medium">{{ limit * page }}</span>
+                    <span v-else class="font-medium">{{ pagination.totalDocs }}</span>
                     of
                     <span class="font-medium">{{ pagination.totalDocs }}</span>
                     results

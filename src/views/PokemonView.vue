@@ -56,7 +56,6 @@ watchEffect(async () => {
               <ArrowLongLeftIcon class="-ml-0.5 h-5 w-5 align-middle" />Go Back
             </button>
           </RouterLink>
-          <!-- <h1 class="flex justify-center text-3xl font-semibold text-gray-900">{{ pokemon.name.toUpperCase() }}</h1> -->
         </div>
         <!-- Your content -->
         <div
