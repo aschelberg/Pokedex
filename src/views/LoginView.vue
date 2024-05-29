@@ -20,7 +20,7 @@ const userStore = useUserStore();
       <button class="flex pt-4 transition-all" @click="userStore.login">
         <div class="flex w-full justify-center rounded-md bg-white border border-gray-700 py-2 text-md font-normal leading-6 text-gray-700 shadow-sm hover:border-red-500 hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300 pr-4">
           <img src="@/assets/web_light_sq_na.svg" alt="Google Icon">
-          <div class="flex my-auto align-middle xs:text-xs">Continue with Google</div>
+          <div class="flex my-auto align-middle xs:text-md">Continue with Google</div>
         </div>
       </button>
     </div>
