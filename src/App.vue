@@ -15,17 +15,15 @@ const { isAuthenticated } = storeToRefs(userStore);
       <RouterView v-slot="{ Component }">
         <template v-if="Component">
           <Transition mode="out-in">
-            <KeepAlive>
-              <Suspense>
-                <!-- main content -->
-                <component :is="Component"></component>
+            <Suspense :timeout="0">
+              <!-- main content -->
+              <component :is="Component"></component>
 
-                <!-- loading state -->
-                <template #fallback>
-                  Loading...
-                </template>
-              </Suspense>
-            </KeepAlive>
+              <!-- loading state -->
+              <template #fallback>
+                Loading...
+              </template>
+            </Suspense>
           </Transition>
         </template>
       </RouterView>
@@ -34,17 +32,15 @@ const { isAuthenticated } = storeToRefs(userStore);
       <RouterView v-slot="{ Component }">
         <template v-if="Component">
           <Transition mode="out-in">
-            <KeepAlive>
-              <Suspense>
-                <!-- main content -->
-                <component :is="Component"></component>
+            <Suspense :timeout="0">
+              <!-- main content -->
+              <component :is="Component"></component>
 
-                <!-- loading state -->
-                <template #fallback>
-                  Loading...
-                </template>
-              </Suspense>
-            </KeepAlive>
+              <!-- loading state -->
+              <template #fallback>
+                Loading...
+              </template>
+            </Suspense>
           </Transition>
         </template>
       </RouterView>

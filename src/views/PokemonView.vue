@@ -3,7 +3,7 @@ import usePokemon from '@/composables/usePokemon.js';
 import TypeBadge from '@/components/Reusables/TypeBadge.vue';
 import GameVersionBadge from '@/components/Reusables/GameVersionBadge.vue';
 import { useRoute } from 'vue-router';
-import { ref, computed, watchEffect, watch } from 'vue';
+import { ref, computed } from 'vue';
 import { ArrowLongLeftIcon } from '@heroicons/vue/20/solid';
 import { BookmarkIcon as BookmarkIconFalse } from '@heroicons/vue/24/outline';
 import { BookmarkIcon as BookmarkIconTrue } from '@heroicons/vue/20/solid';
@@ -35,11 +35,6 @@ const handleRemove = async (id) => {
   await removePokemon(id);
   fetchSavedPokemon()
 };
-
-watchEffect(async () => {
-    if (route.params.name) pokemon.value = await getPokemon(route.params.name);
-    fetchSavedPokemon()
-});
 
 </script>
 
