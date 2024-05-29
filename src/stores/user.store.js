@@ -7,21 +7,23 @@ import {
   signOut,
 } from 'firebase/auth'
 import { useRouter } from 'vue-router';
+import useApi from '@/composables/useApi.js';
 
 const useUserStore = defineStore('user', () => {
   const router = useRouter();
   const googleAuthProvider = new GoogleAuthProvider()
   const auth = useFirebaseAuth() // only exists on client side
-  console.log(auth)
+  const { request } = useApi();
 
-
-  // const { connectWithRedirect, user, logout, isLoading, isConnected } = useEarthoOne();
   const user = useCurrentUser();
   const isAuthenticated = computed(() => !!user.value);
 
   const login = async () => {
     try {
       await signInWithPopup(auth, googleAuthProvider);
+      await request('/pokemon/me', {
+        method: 'POST'
+      });
       router.push('/pokedex');
     } catch (err) {
       console.log(err)
