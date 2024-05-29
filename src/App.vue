@@ -1,8 +1,10 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import AuthenticatedLayout from '@/components/AuthenticatedLayout/AuthenticatedLayout.vue';
 import useUserStore from '@/stores/user.store.js';
+
+const route = useRoute()
 
 const userStore = useUserStore();
 const { isAuthenticated } = storeToRefs(userStore);
@@ -10,7 +12,7 @@ const { isAuthenticated } = storeToRefs(userStore);
 </script>
 
 <template>
- <div class="min-h-screen font-Konit">
+ <div class="min-h-screen font-Konit" :class="`${route.name}`">
     <AuthenticatedLayout v-if="isAuthenticated">
       <RouterView v-slot="{ Component }">
         <template v-if="Component">
@@ -82,7 +84,7 @@ const { isAuthenticated } = storeToRefs(userStore);
   opacity: 0;
 }
 
-.LoginView {
-  background-color: grey;
+.login {
+  background-color: rgb(37, 99, 235);
 }
 </style>
