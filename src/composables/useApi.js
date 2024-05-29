@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { useEarthoOne } from '@eartho/one-client-vue';
+import { getCurrentUser } from 'vuefire';
 
 const useApi = () => {
-  const { idToken } = useEarthoOne();
   const request = async (url, config = {}) => {
+    const user = await getCurrentUser();
     const baseURL = config.baseURL || 'https://api.modernizd.com';
     config.headers = config.headers || {};
     const headers = {
@@ -13,7 +13,7 @@ const useApi = () => {
     };
     
     if (baseURL !== 'https://pokeapi.co/api/v2') {
-      headers.Authorization = `Bearer ${idToken.value}`;
+      headers.Authorization = `Bearer ${user.accessToken}`;
     }
     delete config.headers;
     delete config.baseURL;

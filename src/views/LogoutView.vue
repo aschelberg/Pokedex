@@ -2,7 +2,7 @@
 import useUserStore from '@/stores/user.store.js';
 
 const userStore = useUserStore();
-userStore.logout();
+await userStore.logout();
 
 window.location.href = '/login';
 </script>

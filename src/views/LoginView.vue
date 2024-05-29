@@ -4,12 +4,12 @@ import { storeToRefs } from 'pinia';
 import useUserStore from '@/stores/user.store.js';
 
 const userStore = useUserStore();
-const { isAuthenticated } = storeToRefs(userStore);
-watchEffect(() => {
-  if (isAuthenticated.value) {
-    window.location.href = '/pokedex';
-  }
-});
+// const { isAuthenticated } = storeToRefs(userStore);
+// watchEffect(() => {
+//   if (isAuthenticated.value) {
+//     window.location.href = '/pokedex';
+//   }
+// });
 </script>
 
 <template>
