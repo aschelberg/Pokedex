@@ -85,6 +85,6 @@ const { isAuthenticated } = storeToRefs(userStore);
 }
 
 .login {
-  background-color: rgb(37, 99, 235);
+  background-color: rgb(221, 63, 63);
 }
 </style>

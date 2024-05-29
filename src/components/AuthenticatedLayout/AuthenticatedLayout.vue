@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 import useUserStore from '@/stores/user.store';
 import { storeToRefs } from 'pinia';
 import {
@@ -33,13 +33,15 @@ const navigation = [
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <img
-                class="h-20 w-36"
-                src="@/assets/PokemonLogo.png"
-                alt="Pokemon Pokedex"
-              />
-            </div>
+            <RouterLink :to="'/pokedex'">
+              <div class="flex-shrink-0 cursor-pointer">
+                <img
+                  class="h-20 w-36"
+                  src="@/assets/PokemonLogo.png"
+                  alt="Pokemon Pokedex"
+                />
+              </div>
+            </RouterLink>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
                 <a
