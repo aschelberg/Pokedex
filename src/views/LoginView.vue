@@ -13,14 +13,16 @@ const userStore = useUserStore();
 </script>
 
 <template>
-  <div class="flex justify-center h-screen px-6 py-12 lg:px-8">
-    <div class="flex flex-col justify-around sm:w-full sm:max-w-sm p-10 rounded-lg">
-      <img class="mx-auto h-36 w-auto px-4 bg-red-600 shadow-lg shadow-red-600 rounded-lg" src="@/assets/PokemonLogo.png" alt="Pokemon Pokedex" />
-      <div>
-        <h2 class="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
-        <h3 class="mt-1 text-center text-xl font-bold leading-9 tracking-tight text-gray-900">And start building your Pokedex</h3>
-        <button class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 mt-4" @click="userStore.login">Log In</button>
-      </div>
+  <div class="flex justify-center h-screen w-screen border border-black">
+    <div class="flex flex-col max-h-md sm:w-full sm:max-w-sm p-12 bg-blue-600">
+      <img class="h-36 w-auto px-4 bg-red-600 shadow-lg shadow-red-600 rounded-lg" src="@/assets/PokemonLogo.png" alt="Pokemon Pokedex" />
+      <h1 class="flex justify-center text-md sm:text-xl text-white pt-16">Create a Pokedex Account</h1>
+      <button class="flex pt-4" @click="userStore.login">
+        <div class="flex w-full rounded-md bg-white border border-gray-700 px-3 py-2 text-md font-normal leading-6 text-gray-700 shadow-sm hover:border-red-500 hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300 mx-auto pl-4 sm:pl-8">
+          <img src="@/assets/web_light_sq_na.svg" alt="Google Icon">
+          <div class="flex pl-2 my-auto align-middle xs:text-xs">Continue with Google</div>
+        </div>
+      </button>
     </div>
   </div>
 </template>

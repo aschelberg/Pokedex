@@ -46,7 +46,7 @@ const handleRemove = async (id) => {
         <div class="flex pb-6 border-b-2">
           <RouterLink :to="'/pokedex'">
             <button
-              class="inline-flex items-center gap-x-1.5 rounded-md bg-white border border-grey-400 px-2.5 py-1.5 text-sm font-semibold text-black shadow-sm hover:bg-blue-400 focus-visible:outline-offset-0"
+              class="inline-flex items-center gap-x-1.5 rounded-md bg-red-500 border border-red-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-400 hover:border-blue-400 focus-visible:outline-offset-0"
             >
               <ArrowLongLeftIcon class="-ml-0.5 h-5 w-5 align-middle" />Go Back
             </button>
@@ -69,15 +69,15 @@ const handleRemove = async (id) => {
                 #{{ pokemon.id.toString().padStart(4, "0") }}
               </div>
               <div
-                class="flex gap-1 align-items hover:text-grey-500 justify-end cursor-pointer"
+                class="flex gap-1 align-items justify-end"
               >
-                <h1 v-if="!isSaved" class="my-auto text-blue-700">Add to Saved</h1>
-                <h1 v-else class="my-auto text-blue-700">Saved</h1>
-                <button v-if="!isSaved" @click="handleSave(pokemon.id)">
-                  <BookmarkIconFalse class="h-8 w-6 text-blue-700 cursor-pointer" />
+                <button v-if="!isSaved" @click="handleSave(pokemon.id)" class="flex text-blue-700 cursor-pointer hover:text-red-500">
+                  <h1 class="flex my-auto">Add to Saved</h1>
+                  <BookmarkIconFalse class="h-8 w-6" />
                 </button>
-                <button v-else @click="handleRemove(pokemon.id)">
-                  <BookmarkIconTrue class="h-8 w-6 text-blue-700 cursor-pointer" />
+                <button v-else @click="handleRemove(pokemon.id)" class="flex text-blue-700 cursor-pointer hover:text-red-500">
+                  <h1 class="flex my-auto">Saved</h1>
+                  <BookmarkIconTrue class="h-8 w-6" />
                 </button>
               </div>
             </div>

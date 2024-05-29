@@ -268,7 +268,7 @@ const filteredMove = computed(() =>
       <button
         type="button"
         @click.stop="clearFilters"
-        class="w-full rounded-lg border border-blue-600 bg-white py-1.5 text-gray-900 sm:text-sm sm:leading-6 hover:bg-blue-300"
+        class="w-full rounded-lg border font-medium border-red-500 bg-red-500 py-1.5 text-white sm:text-sm sm:leading-6 hover:bg-blue-300 hover:border-blue-300"
       >
         Clear Filters
       </button>

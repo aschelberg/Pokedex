@@ -207,7 +207,7 @@ watch([searchFilter, filters, page], fetchPokemon, { deep: true });
                 class="flex items-center justify-between bg-white pb-3"
                 aria-label="Pagination"
               >
-                <div class="pl-2 hidden sm:block">
+                <div class="pl-3 hidden sm:block">
                   <p class="text-sm text-gray-700">
                     Showing
                     <span class="font-medium">{{
@@ -228,7 +228,7 @@ watch([searchFilter, filters, page], fetchPokemon, { deep: true });
                       fetchPokemon();
                     "
                     :disabled="!pagination.hasPrevPage"
-                    class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 border border-blue-600 hover:bg-gray-50 focus-visible:outline-offset-0"
+                    class="relative inline-flex items-center rounded-md bg-blue-300 px-3 py-2 text-sm font-semibold text-gray-900 border border-blue-300 hover:bg-gray-50 focus-visible:outline-offset-0 disabled:text-gray-500 disabled:bg-gray-200 disabled:border-none"
                   >
                     Previous
                   </button>
@@ -238,7 +238,7 @@ watch([searchFilter, filters, page], fetchPokemon, { deep: true });
                       fetchPokemon();
                     "
                     :disabled="!pagination.hasNextPage"
-                    class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 border border-blue-600 hover:bg-gray-50 focus-visible:outline-offset-0"
+                    class="relative ml-3 inline-flex items-center rounded-md bg-blue-300 px-3 py-2 text-sm font-semibold text-gray-900 border border-blue-300 hover:bg-gray-50 focus-visible:outline-offset-0 disabled:text-gray-500 disabled:bg-gray-200 disabled:border-none"
                   >
                     Next
                   </button>

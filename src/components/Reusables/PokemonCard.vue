@@ -50,10 +50,10 @@ const handleRemove = async (id) => {
       </RouterLink>
       <div class="flex gap-3 justify-end">
         <button v-if="!isSaved" @click="handleSave(pokemon.id)">
-          <BookmarkIconFalse class="h-8 w-6 text-blue-700 cursor-pointer" />
+          <BookmarkIconFalse class="h-8 w-6 text-blue-700 cursor-pointer hover:text-red-500 hover:bg-gray-150 hover:rounded-md hover:shadow-sm" />
         </button>
         <button v-else @click="handleRemove(pokemon.id)">
-          <BookmarkIconTrue class="h-8 w-6 text-blue-700 cursor-pointer" />
+          <BookmarkIconTrue class="h-8 w-6 text-blue-700 cursor-pointer hover:text-red-500 hover:bg-gray-150 hover:rounded-md hover:shadow-sm" />
         </button>
         
       </div>

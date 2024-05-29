@@ -18,8 +18,6 @@ const { user } = storeToRefs(useUserStore())
 
 
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '/logout' },
 ];
 
@@ -30,7 +28,7 @@ const navigation = [
 </script>
 
 <template>
-  <div class="min-h-full">
+  <div class="min-h-full min-w-full">
     <Disclosure as="nav" class="bg-blue-600" v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
